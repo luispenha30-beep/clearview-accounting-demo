@@ -5,46 +5,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Clearview Accounting — Small Business Accounting & Tax, Auckland</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
   :root {
-    --forest: #1a3a2a;
-    --forest-light: #234a36;
-    --forest-mid: #2d5a42;
-    --gold: #c4a35a;
-    --gold-light: #d4b76e;
-    --gold-dark: #a88a42;
-    --sand: #f8f6f1;
-    --sand-dark: #eee9e0;
-    --white: #ffffff;
-    --text-dark: #1c1c1c;
-    --text-mid: #505050;
-    --text-light: #858585;
-    --text-on-dark: #bfbdab;
+    --navy: #1B2A4A;
+    --navy-deep: #0F1A2E;
+    --navy-light: #243556;
+    --gold: #C9A961;
+    --gold-light: #D4B976;
+    --gold-muted: rgba(201,169,97,0.12);
+    --bg-warm: #F4F2ED;
+    --bg-warm-alt: #ECEAE4;
+    --white: #FFFFFF;
+    --text-primary: #1C2133;
+    --text-secondary: #505868;
+    --text-tertiary: #8A909C;
+    --text-on-dark: #A8AEBB;
+    --border: rgba(0,0,0,0.06);
     --radius: 8px;
-    --shadow: 0 2px 16px rgba(26,58,42,0.06);
-    --shadow-lg: 0 12px 40px rgba(26,58,42,0.1);
+    --radius-lg: 16px;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+    --shadow-lg: 0 12px 48px rgba(0,0,0,0.08);
+    --transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-padding-top: 72px;
-  }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     font-size: 16px;
     line-height: 1.6;
-    color: var(--text-dark);
-    background: var(--sand);
+    color: var(--text-primary);
+    background: var(--bg-warm);
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ════════════════════════════════════════
-     NAVIGATION
-     ════════════════════════════════════════ */
+  /* ═══════ NAVIGATION ═══════ */
 
   nav {
     position: fixed;
@@ -52,76 +51,108 @@
     left: 0;
     right: 0;
     z-index: 1000;
-    background: var(--white);
-    height: 72px;
+    height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 48px;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-    transition: box-shadow 0.3s ease;
+    padding: 0 56px;
+    background: transparent;
+    transition: background var(--transition), box-shadow var(--transition);
   }
 
   nav.scrolled {
-    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 1px 0 var(--border);
   }
 
   .nav-logo {
-    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 22px;
-    color: var(--forest);
+    font-size: 20px;
+    color: var(--white);
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 10px;
+    letter-spacing: -0.3px;
+    transition: color var(--transition);
   }
 
-  .nav-logo .logo-mark {
-    width: 34px;
-    height: 34px;
-    background: var(--forest);
+  nav.scrolled .nav-logo { color: var(--navy); }
+
+  .logo-mark {
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--gold);
+    font-size: 15px;
+    color: var(--white);
     font-weight: 800;
   }
 
   .nav-links {
     display: flex;
-    gap: 36px;
+    gap: 40px;
     list-style: none;
     align-items: center;
   }
 
   .nav-links a {
-    color: var(--text-mid);
+    color: rgba(255,255,255,0.7);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    transition: color 0.2s ease;
+    transition: color var(--transition);
+    position: relative;
   }
 
-  .nav-links a:hover {
-    color: var(--forest);
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    width: 0;
+    height: 1.5px;
+    background: var(--gold);
+    transition: width var(--transition);
   }
+
+  .nav-links a:hover::after { width: 100%; }
+
+  nav.scrolled .nav-links a { color: var(--text-secondary); }
+  .nav-links a:hover { color: var(--white); }
+  nav.scrolled .nav-links a:hover { color: var(--navy); }
 
   .nav-cta {
-    background: var(--forest) !important;
+    background: rgba(255,255,255,0.12) !important;
     color: var(--white) !important;
-    padding: 10px 22px;
-    border-radius: var(--radius);
+    padding: 10px 24px !important;
+    border-radius: var(--radius) !important;
     font-weight: 600 !important;
-    transition: background 0.2s ease, transform 0.2s ease !important;
+    border: 1px solid rgba(255,255,255,0.15) !important;
+    transition: all var(--transition) !important;
   }
 
+  .nav-cta::after { display: none !important; }
+
   .nav-cta:hover {
-    background: var(--forest-light) !important;
-    transform: translateY(-1px);
+    background: var(--gold) !important;
+    border-color: var(--gold) !important;
+  }
+
+  nav.scrolled .nav-cta {
+    background: var(--navy) !important;
+    color: var(--white) !important;
+    border-color: var(--navy) !important;
+  }
+
+  nav.scrolled .nav-cta:hover {
+    background: var(--navy-light) !important;
+    border-color: var(--navy-light) !important;
   }
 
   .hamburger {
@@ -134,104 +165,121 @@
   }
 
   .hamburger span {
-    width: 24px;
-    height: 2px;
-    background: var(--forest);
+    width: 22px;
+    height: 1.5px;
+    background: var(--white);
     transition: all 0.3s ease;
     display: block;
   }
 
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
+  nav.scrolled .hamburger span { background: var(--navy); }
 
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
-
-  /* ════════════════════════════════════════
-     HERO
-     ════════════════════════════════════════ */
+  /* ═══════ HERO ═══════ */
 
   .hero {
-    margin-top: 72px;
-    padding: 100px 48px 120px;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: var(--navy-deep);
     position: relative;
     overflow: hidden;
-    background: var(--white);
+    padding: 0 56px;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,97,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(27,42,74,0.8) 0%, transparent 60%);
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(201,169,97,0.2), transparent);
   }
 
   .hero-grid {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 96px;
     align-items: center;
-  }
-
-  .hero-content {
     position: relative;
     z-index: 2;
   }
 
-  .hero-badge {
+  .hero-content { padding: 40px 0; }
+
+  .hero-label {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: rgba(26,58,42,0.06);
-    color: var(--forest);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 13px;
+    color: var(--gold);
+    font-size: 12px;
     font-weight: 600;
-    margin-bottom: 28px;
-    animation: fadeUp 0.6s ease both;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
   }
 
-  .hero-badge-dot {
-    width: 8px;
-    height: 8px;
+  .hero-label-line {
+    width: 24px;
+    height: 1px;
     background: var(--gold);
-    border-radius: 50%;
   }
 
   .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 52px;
-    line-height: 1.1;
-    color: var(--forest);
-    margin-bottom: 24px;
-    animation: fadeUp 0.6s ease 0.1s both;
+    font-weight: 300;
+    font-size: 64px;
+    line-height: 1.08;
+    color: var(--white);
+    letter-spacing: -2px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.35s forwards;
   }
 
-  .hero h1 span {
-    color: var(--gold-dark);
+  .hero h1 strong {
+    font-weight: 700;
   }
 
-  .hero p {
+  .hero-sub {
     font-size: 17px;
-    color: var(--text-mid);
+    color: var(--text-on-dark);
     line-height: 1.75;
-    margin-bottom: 36px;
-    max-width: 480px;
-    animation: fadeUp 0.6s ease 0.2s both;
+    margin-bottom: 44px;
+    max-width: 440px;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
   }
 
-  .hero-buttons {
+  .hero-actions {
     display: flex;
     gap: 16px;
+    align-items: center;
     flex-wrap: wrap;
-    animation: fadeUp 0.6s ease 0.3s both;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.65s forwards;
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
+    from { opacity: 0; transform: translateY(24px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
@@ -239,328 +287,345 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--forest);
+    background: var(--gold);
     color: var(--white);
-    padding: 16px 32px;
+    padding: 16px 36px;
     border-radius: var(--radius);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 15px;
-    transition: all 0.2s ease;
+    transition: all var(--transition);
     border: none;
     cursor: pointer;
+    letter-spacing: 0.2px;
   }
 
   .btn-primary:hover {
-    background: var(--forest-light);
+    background: var(--gold-light);
     transform: translateY(-2px);
-    box-shadow: 0 6px 24px rgba(26,58,42,0.25);
+    box-shadow: 0 8px 24px rgba(201,169,97,0.3);
   }
 
-  .btn-secondary {
+  .btn-ghost {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: transparent;
-    color: var(--forest);
-    padding: 16px 32px;
-    border-radius: var(--radius);
+    gap: 6px;
+    color: rgba(255,255,255,0.6);
     text-decoration: none;
-    font-weight: 600;
-    font-size: 15px;
-    border: 2px solid rgba(26,58,42,0.15);
-    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 16px 8px;
+    transition: color var(--transition);
   }
 
-  .btn-secondary:hover {
-    border-color: var(--forest);
-    background: rgba(26,58,42,0.03);
-  }
+  .btn-ghost:hover { color: var(--white); }
 
   .hero-visual {
-    position: relative;
-    animation: fadeUp 0.8s ease 0.2s both;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
   }
 
   .hero-card {
-    background: var(--forest);
-    border-radius: 16px;
-    padding: 40px;
-    position: relative;
-    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: var(--radius-lg);
+    padding: 44px;
+    backdrop-filter: blur(8px);
   }
 
-  .hero-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(135deg, rgba(196,163,90,0.08) 0%, transparent 60%);
+  .hero-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 36px;
   }
 
-  .hero-card-grid {
-    position: relative;
-    z-index: 1;
+  .hero-metric {
+    padding: 24px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.04);
   }
 
-  .hero-stat-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 32px;
+  .hero-metric-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
   }
 
-  .hero-stat {
-    text-align: center;
-  }
-
-  .hero-stat-value {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 36px;
-    color: var(--gold);
+  .hero-metric-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -1px;
     line-height: 1;
   }
 
-  .hero-stat-label {
-    font-size: 11px;
-    color: rgba(255,255,255,0.5);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-top: 6px;
-    font-weight: 500;
-  }
+  .hero-metric-value .accent { color: var(--gold); }
 
-  .hero-chart {
-    background: rgba(255,255,255,0.06);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 24px;
-  }
-
-  .hero-chart-title {
+  .hero-metric-change {
     font-size: 12px;
-    color: rgba(255,255,255,0.4);
+    color: #6BCB77;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  .hero-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-bottom: 28px;
+  }
+
+  .hero-bar-chart {
+    margin-bottom: 20px;
+  }
+
+  .hero-bar-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    font-weight: 600;
     margin-bottom: 16px;
   }
 
-  .chart-bars {
+  .bar-row {
     display: flex;
-    align-items: flex-end;
-    gap: 8px;
-    height: 80px;
-  }
-
-  .chart-bar {
-    flex: 1;
-    background: rgba(196,163,90,0.3);
-    border-radius: 4px 4px 0 0;
-    position: relative;
-    transition: background 0.3s ease;
-  }
-
-  .chart-bar:nth-child(1) { height: 45%; }
-  .chart-bar:nth-child(2) { height: 55%; }
-  .chart-bar:nth-child(3) { height: 40%; }
-  .chart-bar:nth-child(4) { height: 70%; }
-  .chart-bar:nth-child(5) { height: 60%; }
-  .chart-bar:nth-child(6) { height: 85%; background: var(--gold); }
-  .chart-bar:nth-child(7) { height: 75%; }
-  .chart-bar:nth-child(8) { height: 65%; }
-  .chart-bar:nth-child(9) { height: 90%; background: var(--gold); }
-  .chart-bar:nth-child(10) { height: 80%; }
-  .chart-bar:nth-child(11) { height: 95%; background: var(--gold); }
-  .chart-bar:nth-child(12) { height: 100%; background: var(--gold-light); }
-
-  .chart-labels {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 8px;
-  }
-
-  .chart-labels span {
-    font-size: 10px;
-    color: rgba(255,255,255,0.3);
-    letter-spacing: 0.5px;
-  }
-
-  .hero-card-bottom {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding-top: 4px;
+    gap: 12px;
+    margin-bottom: 10px;
   }
 
-  .hero-card-tag {
+  .bar-label {
     font-size: 12px;
     color: rgba(255,255,255,0.4);
+    width: 24px;
     font-weight: 500;
   }
 
-  .hero-card-amount {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 20px;
-    color: var(--white);
+  .bar-track {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 3px;
+    overflow: hidden;
   }
 
-  /* ════════════════════════════════════════
-     TRUST BAR
-     ════════════════════════════════════════ */
+  .bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: var(--gold);
+    opacity: 0.6;
+    transition: width 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .bar-fill.highlight { opacity: 1; }
+
+  .bar-amount {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 600;
+    width: 56px;
+    text-align: right;
+  }
+
+  .hero-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+  }
+
+  .hero-card-tag {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  .hero-card-total {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    font-weight: 500;
+  }
+
+  .hero-card-total span {
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 16px;
+    margin-left: 6px;
+  }
+
+  /* ═══════ TRUST BAR ═══════ */
 
   .trust-bar {
-    background: var(--sand);
-    padding: 48px;
-    text-align: center;
+    background: var(--white);
+    padding: 40px 56px;
+    border-bottom: 1px solid var(--border);
   }
 
-  .trust-bar p {
-    font-size: 13px;
-    color: var(--text-light);
+  .trust-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+
+  .trust-label {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: 600;
-    margin-bottom: 24px;
+    letter-spacing: 1.5px;
+    white-space: nowrap;
+  }
+
+  .trust-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
   }
 
   .trust-logos {
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 48px;
-    flex-wrap: wrap;
+    gap: 40px;
   }
 
   .trust-logo {
-    font-family: 'Inter', sans-serif;
     font-weight: 700;
-    font-size: 15px;
-    color: var(--text-light);
+    font-size: 14px;
+    color: var(--text-tertiary);
     opacity: 0.5;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
   }
 
-  /* ════════════════════════════════════════
-     SECTION SHARED
-     ════════════════════════════════════════ */
+  /* ═══════ SECTIONS ═══════ */
 
   section {
-    padding: 96px 48px;
+    padding: 112px 56px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .section-header {
     text-align: center;
-    margin-bottom: 64px;
+    margin-bottom: 72px;
   }
 
   .section-label {
-    display: inline-block;
-    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
     font-size: 12px;
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    color: var(--gold-dark);
-    margin-bottom: 14px;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .label-line {
+    width: 20px;
+    height: 1px;
+    background: var(--gold);
   }
 
   .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 40px;
-    color: var(--forest);
-    line-height: 1.15;
-    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 44px;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -1.5px;
   }
 
   .section-header p {
     font-size: 17px;
-    color: var(--text-mid);
-    max-width: 540px;
+    color: var(--text-secondary);
+    max-width: 520px;
     margin: 0 auto;
     line-height: 1.7;
+    font-weight: 400;
   }
 
-  .container {
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
-  /* ════════════════════════════════════════
-     SERVICES
-     ════════════════════════════════════════ */
+  /* ═══════ SERVICES ═══════ */
 
   #services {
-    background: var(--sand);
+    background: var(--bg-warm);
   }
 
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
 
   .service-card {
     background: var(--white);
-    border-radius: var(--radius);
-    padding: 40px 32px;
+    border-radius: var(--radius-lg);
+    padding: 44px 36px;
+    border: 1px solid var(--border);
+    transition: all var(--transition);
     position: relative;
-    overflow: hidden;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    border: 1px solid rgba(0,0,0,0.04);
   }
 
   .service-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-lg);
+    border-color: transparent;
   }
 
   .service-icon {
-    width: 52px;
-    height: 52px;
-    background: rgba(26,58,42,0.06);
+    width: 48px;
+    height: 48px;
+    background: var(--bg-warm);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    margin-bottom: 24px;
   }
 
   .service-card h3 {
-    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 20px;
-    color: var(--forest);
+    font-size: 18px;
+    color: var(--navy);
     margin-bottom: 12px;
+    letter-spacing: -0.3px;
   }
 
   .service-card p {
     font-size: 14px;
-    color: var(--text-mid);
+    color: var(--text-secondary);
     line-height: 1.7;
   }
 
-  .service-card .service-link {
+  .service-link {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    margin-top: 16px;
-    font-size: 14px;
+    margin-top: 20px;
+    font-size: 13px;
     font-weight: 600;
-    color: var(--forest);
+    color: var(--gold);
     text-decoration: none;
-    transition: gap 0.2s ease;
+    transition: gap var(--transition);
   }
 
-  .service-card:hover .service-link {
-    gap: 10px;
-  }
+  .service-card:hover .service-link { gap: 10px; }
 
-  /* ════════════════════════════════════════
-     ABOUT / WHY US
-     ════════════════════════════════════════ */
+  /* ═══════ ABOUT ═══════ */
 
   #about {
     background: var(--white);
@@ -569,181 +634,162 @@
   .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 96px;
     align-items: center;
   }
 
-  .about-content .section-label {
-    text-align: left;
-  }
+  .about-content .section-label { text-align: left; }
 
   .about-content h2 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 36px;
-    color: var(--forest);
-    line-height: 1.15;
-    margin-bottom: 20px;
+    font-weight: 700;
+    font-size: 40px;
+    color: var(--navy);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -1.5px;
   }
 
   .about-content p {
-    color: var(--text-mid);
+    color: var(--text-secondary);
     margin-bottom: 16px;
-    line-height: 1.75;
+    line-height: 1.8;
+    font-size: 15px;
   }
 
   .about-checklist {
     list-style: none;
-    margin-top: 24px;
+    margin-top: 32px;
   }
 
   .about-checklist li {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 10px 0;
+    gap: 14px;
+    padding: 12px 0;
     font-size: 15px;
-    color: var(--text-mid);
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border);
   }
 
+  .about-checklist li:last-child { border-bottom: none; }
+
   .check-icon {
-    width: 24px;
-    height: 24px;
-    background: rgba(26,58,42,0.08);
+    width: 22px;
+    height: 22px;
+    background: var(--gold-muted);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
-    color: var(--forest);
+    font-size: 11px;
+    color: var(--gold);
     flex-shrink: 0;
-    margin-top: 1px;
+    margin-top: 2px;
+    font-weight: 700;
   }
 
-  .about-image {
-    background: linear-gradient(145deg, var(--forest) 0%, var(--forest-light) 60%, var(--forest-mid) 100%);
-    border-radius: 16px;
-    height: 460px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  .about-visual {
+    background: var(--navy-deep);
+    border-radius: var(--radius-lg);
+    padding: 56px;
     position: relative;
     overflow: hidden;
   }
 
-  .about-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 40px,
-        rgba(255,255,255,0.015) 40px,
-        rgba(255,255,255,0.015) 41px
-      );
-  }
-
-  .about-image::after {
+  .about-visual::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
-    height: 4px;
-    background: var(--gold);
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  }
+
+  .about-visual::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,255,255,0.008) 60px, rgba(255,255,255,0.008) 61px);
+  }
+
+  .about-brand {
+    position: relative;
+    z-index: 1;
+    text-align: center;
   }
 
   .about-brand-icon {
-    width: 80px;
-    height: 80px;
-    background: rgba(196,163,90,0.15);
-    border: 2px solid rgba(196,163,90,0.3);
+    width: 72px;
+    height: 72px;
+    background: rgba(201,169,97,0.1);
+    border: 1px solid rgba(201,169,97,0.2);
     border-radius: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 36px;
+    font-size: 28px;
     color: var(--gold);
-    margin-bottom: 24px;
-    position: relative;
-    z-index: 1;
+    font-weight: 800;
+    margin: 0 auto 28px;
   }
 
   .about-brand-name {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 28px;
+    font-weight: 700;
+    font-size: 26px;
     color: var(--white);
-    position: relative;
-    z-index: 1;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
   }
 
   .about-brand-tagline {
-    font-size: 13px;
+    font-size: 12px;
     color: var(--gold);
-    letter-spacing: 3px;
+    letter-spacing: 2.5px;
     text-transform: uppercase;
-    margin-top: 10px;
-    position: relative;
-    z-index: 1;
     font-weight: 500;
   }
 
-  .about-stats-row {
-    display: flex;
-    gap: 48px;
-    margin-top: 40px;
-    padding-top: 32px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.06);
     position: relative;
     z-index: 1;
   }
 
-  .about-stat {
-    text-align: center;
-  }
+  .about-stat { text-align: center; }
 
   .about-stat-value {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 32px;
-    color: var(--gold);
+    font-weight: 700;
+    font-size: 36px;
+    color: var(--white);
+    letter-spacing: -1px;
     line-height: 1;
   }
 
   .about-stat-label {
     font-size: 11px;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.35);
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-top: 6px;
+    margin-top: 8px;
+    font-weight: 500;
   }
 
-  /* ════════════════════════════════════════
-     PROCESS
-     ════════════════════════════════════════ */
+  /* ═══════ PROCESS ═══════ */
 
   #process {
-    background: var(--forest);
-    position: relative;
+    background: var(--navy-deep);
   }
 
-  #process .section-label {
-    color: var(--gold);
-  }
-
-  #process .section-header h2 {
-    color: var(--white);
-  }
-
-  #process .section-header p {
-    color: var(--text-on-dark);
-  }
+  #process .section-label { color: var(--gold); }
+  #process .section-header h2 { color: var(--white); }
+  #process .section-header p { color: var(--text-on-dark); }
 
   .process-grid {
     display: grid;
@@ -753,140 +799,138 @@
 
   .process-step {
     text-align: center;
-    position: relative;
-    padding: 0 12px;
+    padding: 40px 20px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition);
+  }
+
+  .process-step:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(201,169,97,0.15);
   }
 
   .process-number {
-    width: 56px;
-    height: 56px;
-    background: rgba(196,163,90,0.12);
-    border: 2px solid rgba(196,163,90,0.25);
+    width: 48px;
+    height: 48px;
+    border: 1.5px solid rgba(201,169,97,0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 22px;
+    font-weight: 700;
+    font-size: 18px;
     color: var(--gold);
-    margin: 0 auto 20px;
+    margin: 0 auto 24px;
   }
 
   .process-step h3 {
-    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 17px;
     color: var(--white);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    letter-spacing: -0.2px;
   }
 
   .process-step p {
     font-size: 14px;
-    color: rgba(255,255,255,0.55);
-    line-height: 1.65;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
   }
 
-  /* ════════════════════════════════════════
-     TESTIMONIALS
-     ════════════════════════════════════════ */
+  /* ═══════ TESTIMONIALS ═══════ */
 
   #testimonials {
-    background: var(--white);
+    background: var(--bg-warm);
   }
 
   .testimonials-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
 
   .testimonial-card {
-    background: var(--sand);
-    border-radius: var(--radius);
-    padding: 36px 32px;
-    position: relative;
-    border: 1px solid rgba(0,0,0,0.04);
-    transition: transform 0.25s ease;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 40px 36px;
+    border: 1px solid var(--border);
+    transition: transform var(--transition);
   }
 
-  .testimonial-card:hover {
-    transform: translateY(-3px);
-  }
+  .testimonial-card:hover { transform: translateY(-3px); }
 
-  .testimonial-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: 48px;
+  .testimonial-stars {
     color: var(--gold);
-    line-height: 1;
-    margin-bottom: 8px;
-    opacity: 0.4;
+    font-size: 14px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
   }
 
   .testimonial-text {
     font-size: 15px;
-    color: var(--text-mid);
+    color: var(--text-secondary);
     line-height: 1.75;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
   }
 
   .testimonial-author {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
   }
 
   .testimonial-avatar {
-    width: 44px;
-    height: 44px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Playfair Display', serif;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 15px;
     color: var(--white);
     flex-shrink: 0;
   }
 
-  .testimonial-card:nth-child(1) .testimonial-avatar { background: var(--forest); }
-  .testimonial-card:nth-child(2) .testimonial-avatar { background: var(--gold-dark); }
-  .testimonial-card:nth-child(3) .testimonial-avatar { background: #5a6a7a; }
+  .testimonial-card:nth-child(1) .testimonial-avatar { background: var(--navy); }
+  .testimonial-card:nth-child(2) .testimonial-avatar { background: var(--gold); }
+  .testimonial-card:nth-child(3) .testimonial-avatar { background: #5A6A7A; }
 
   .testimonial-name {
     font-weight: 700;
-    font-size: 15px;
-    color: var(--forest);
+    font-size: 14px;
+    color: var(--navy);
   }
 
   .testimonial-role {
     font-size: 13px;
-    color: var(--text-light);
+    color: var(--text-tertiary);
   }
 
-  /* ════════════════════════════════════════
-     PRICING
-     ════════════════════════════════════════ */
+  /* ═══════ PRICING ═══════ */
 
   #pricing {
-    background: var(--sand);
+    background: var(--white);
   }
 
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
 
   .pricing-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 40px 32px;
+    border-radius: var(--radius-lg);
+    padding: 48px 36px;
     text-align: center;
+    border: 1px solid var(--border);
+    transition: all var(--transition);
+    background: var(--white);
     position: relative;
-    border: 1px solid rgba(0,0,0,0.04);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .pricing-card:hover {
@@ -895,85 +939,61 @@
   }
 
   .pricing-card.featured {
-    background: var(--forest);
-    border-color: transparent;
+    background: var(--navy-deep);
+    border-color: rgba(201,169,97,0.2);
   }
 
   .pricing-badge {
     position: absolute;
-    top: -12px;
+    top: -11px;
     left: 50%;
     transform: translateX(-50%);
     background: var(--gold);
     color: var(--white);
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.5px;
+    letter-spacing: 1px;
     text-transform: uppercase;
-    padding: 6px 20px;
+    padding: 5px 18px;
     border-radius: 20px;
+    white-space: nowrap;
   }
 
-  .pricing-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 22px;
-    margin-bottom: 8px;
-  }
-
-  .pricing-card .pricing-desc {
-    font-size: 14px;
-    margin-bottom: 24px;
-  }
-
-  .pricing-price {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 44px;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-
-  .pricing-period {
-    font-size: 14px;
-    margin-bottom: 28px;
-  }
+  .pricing-card h3 { font-weight: 700; font-size: 20px; margin-bottom: 6px; letter-spacing: -0.3px; }
+  .pricing-desc { font-size: 14px; margin-bottom: 28px; }
+  .pricing-price { font-weight: 800; font-size: 48px; line-height: 1; margin-bottom: 4px; letter-spacing: -2px; }
+  .pricing-period { font-size: 13px; margin-bottom: 32px; }
 
   .pricing-features {
     list-style: none;
     text-align: left;
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
 
   .pricing-features li {
-    padding: 8px 0;
+    padding: 9px 0;
     font-size: 14px;
     display: flex;
     align-items: center;
     gap: 10px;
+    border-bottom: 1px solid var(--border);
   }
 
-  .pricing-features li::before {
-    content: '\2713';
-    font-weight: 700;
-    font-size: 14px;
-    flex-shrink: 0;
-  }
+  .pricing-features li:last-child { border-bottom: none; }
+  .pricing-features li::before { content: '\2713'; font-weight: 700; font-size: 13px; flex-shrink: 0; }
 
-  /* Default card colors */
-  .pricing-card h3 { color: var(--forest); }
-  .pricing-card .pricing-desc { color: var(--text-light); }
-  .pricing-card .pricing-price { color: var(--forest); }
-  .pricing-card .pricing-period { color: var(--text-light); }
-  .pricing-card .pricing-features li { color: var(--text-mid); }
-  .pricing-card .pricing-features li::before { color: var(--forest); }
+  .pricing-card h3 { color: var(--navy); }
+  .pricing-desc { color: var(--text-tertiary); }
+  .pricing-price { color: var(--navy); }
+  .pricing-period { color: var(--text-tertiary); }
+  .pricing-features li { color: var(--text-secondary); }
+  .pricing-features li::before { color: var(--gold); }
 
-  /* Featured card colors */
   .pricing-card.featured h3 { color: var(--white); }
-  .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.5); }
+  .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.4); }
   .pricing-card.featured .pricing-price { color: var(--gold); }
-  .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.4); }
-  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.7); }
+  .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.35); }
+  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.06); }
   .pricing-card.featured .pricing-features li::before { color: var(--gold); }
 
   .pricing-btn {
@@ -982,27 +1002,27 @@
     padding: 14px;
     border-radius: var(--radius);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 14px;
     text-align: center;
-    transition: all 0.2s ease;
+    transition: all var(--transition);
   }
 
   .pricing-btn-outline {
     background: transparent;
-    color: var(--forest);
-    border: 2px solid rgba(26,58,42,0.15);
+    color: var(--navy);
+    border: 1.5px solid var(--border);
   }
 
   .pricing-btn-outline:hover {
-    border-color: var(--forest);
-    background: rgba(26,58,42,0.03);
+    border-color: var(--navy);
+    background: rgba(27,42,74,0.03);
   }
 
   .pricing-btn-gold {
     background: var(--gold);
     color: var(--white);
-    border: 2px solid var(--gold);
+    border: 1.5px solid var(--gold);
   }
 
   .pricing-btn-gold:hover {
@@ -1011,175 +1031,11 @@
     transform: translateY(-1px);
   }
 
-  /* ════════════════════════════════════════
-     CONTACT
-     ════════════════════════════════════════ */
-
-  #contact {
-    background: var(--white);
-  }
-
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
-  }
-
-  .contact-form {
-    background: var(--sand);
-    padding: 40px;
-    border-radius: var(--radius);
-  }
-
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
-  .form-group label {
-    display: block;
-    font-weight: 600;
-    font-size: 13px;
-    color: var(--forest);
-    margin-bottom: 6px;
-  }
-
-  .form-group input,
-  .form-group select,
-  .form-group textarea {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid var(--sand-dark);
-    border-radius: var(--radius);
-    font-family: 'Inter', sans-serif;
-    font-size: 15px;
-    color: var(--text-dark);
-    transition: border-color 0.2s ease;
-    background: var(--white);
-    outline: none;
-  }
-
-  .form-group input:focus,
-  .form-group select:focus,
-  .form-group textarea:focus {
-    border-color: var(--forest);
-  }
-
-  .form-group textarea {
-    height: 100px;
-    resize: vertical;
-  }
-
-  .form-submit {
-    width: 100%;
-    padding: 16px;
-    background: var(--forest);
-    color: var(--white);
-    border: none;
-    border-radius: var(--radius);
-    font-family: 'Inter', sans-serif;
-    font-weight: 700;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .form-submit:hover {
-    background: var(--forest-light);
-    transform: translateY(-1px);
-  }
-
-  .contact-info {
-    padding-top: 8px;
-  }
-
-  .contact-info h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 30px;
-    color: var(--forest);
-    margin-bottom: 8px;
-  }
-
-  .contact-info > p {
-    color: var(--text-mid);
-    margin-bottom: 36px;
-    line-height: 1.7;
-  }
-
-  .contact-detail {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-    align-items: flex-start;
-  }
-
-  .contact-detail-icon {
-    width: 48px;
-    height: 48px;
-    background: rgba(26,58,42,0.06);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    flex-shrink: 0;
-  }
-
-  .contact-detail-text strong {
-    display: block;
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--forest);
-    margin-bottom: 2px;
-  }
-
-  .contact-detail-text span {
-    font-size: 14px;
-    color: var(--text-mid);
-  }
-
-  .contact-guarantee {
-    background: var(--sand);
-    border-radius: var(--radius);
-    padding: 28px;
-    margin-top: 36px;
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-  }
-
-  .guarantee-icon {
-    font-size: 28px;
-    flex-shrink: 0;
-  }
-
-  .contact-guarantee h4 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    font-size: 16px;
-    color: var(--forest);
-    margin-bottom: 4px;
-  }
-
-  .contact-guarantee p {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.6;
-  }
-
-  /* ════════════════════════════════════════
-     CTA BANNER
-     ════════════════════════════════════════ */
+  /* ═══════ CTA ═══════ */
 
   .cta-banner {
-    background: var(--gold);
-    padding: 64px 48px;
+    background: var(--navy);
+    padding: 96px 56px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -1189,199 +1045,350 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+    background: radial-gradient(ellipse 50% 100% at 50% 100%, rgba(201,169,97,0.06) 0%, transparent 70%);
   }
 
   .cta-banner h2 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 34px;
+    font-weight: 700;
+    font-size: 40px;
     color: var(--white);
-    margin-bottom: 12px;
+    margin-bottom: 16px;
+    letter-spacing: -1.5px;
     position: relative;
   }
 
   .cta-banner p {
-    color: rgba(255,255,255,0.85);
+    color: var(--text-on-dark);
     font-size: 17px;
-    margin-bottom: 28px;
+    margin-bottom: 36px;
     position: relative;
   }
 
-  .cta-banner .btn-white {
+  .cta-banner .btn-gold {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: var(--white);
-    color: var(--gold-dark);
-    padding: 16px 36px;
+    background: var(--gold);
+    color: var(--white);
+    padding: 18px 40px;
     border-radius: var(--radius);
     text-decoration: none;
-    font-weight: 700;
+    font-weight: 600;
     font-size: 15px;
-    transition: all 0.2s ease;
+    transition: all var(--transition);
     position: relative;
   }
 
-  .cta-banner .btn-white:hover {
+  .cta-banner .btn-gold:hover {
+    background: var(--gold-light);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    box-shadow: 0 8px 28px rgba(201,169,97,0.3);
   }
 
-  /* ════════════════════════════════════════
-     FOOTER
-     ════════════════════════════════════════ */
+  /* ═══════ CONTACT ═══════ */
+
+  #contact {
+    background: var(--bg-warm);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+  }
+
+  .contact-form {
+    background: var(--white);
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group { margin-bottom: 20px; }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--navy);
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid rgba(0,0,0,0.08);
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: border-color var(--transition);
+    background: var(--bg-warm);
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+    background: var(--white);
+  }
+
+  .form-group textarea { height: 100px; resize: vertical; }
+
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all var(--transition);
+    letter-spacing: 0.2px;
+  }
+
+  .form-submit:hover {
+    background: var(--navy-light);
+    transform: translateY(-1px);
+  }
+
+  .contact-info { padding-top: 8px; }
+
+  .contact-info h3 {
+    font-weight: 700;
+    font-size: 32px;
+    color: var(--navy);
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+  }
+
+  .contact-info > p {
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  .contact-detail {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 28px;
+    align-items: flex-start;
+  }
+
+  .contact-detail-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--gold-muted);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-detail-text strong {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .contact-detail-text span {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .contact-guarantee {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    margin-top: 40px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .guarantee-icon { font-size: 24px; flex-shrink: 0; }
+
+  .contact-guarantee h4 {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+
+  .contact-guarantee p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  /* ═══════ FOOTER ═══════ */
 
   footer {
-    background: var(--forest);
-    padding: 64px 48px 32px;
-    color: var(--text-on-dark);
+    background: var(--navy-deep);
+    padding: 72px 56px 36px;
   }
 
   .footer-grid {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     gap: 48px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
   .footer-brand h3 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
-    font-size: 22px;
+    font-weight: 700;
+    font-size: 20px;
     color: var(--white);
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    letter-spacing: -0.3px;
   }
 
   .footer-brand p {
     font-size: 14px;
     line-height: 1.7;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.35);
     max-width: 280px;
   }
 
   .footer-col h4 {
-    font-weight: 700;
-    font-size: 12px;
-    color: var(--white);
+    font-weight: 600;
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
     text-transform: uppercase;
     letter-spacing: 1.5px;
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
 
   .footer-col a {
     display: block;
-    color: rgba(255,255,255,0.45);
+    color: rgba(255,255,255,0.35);
     text-decoration: none;
     font-size: 14px;
     padding: 5px 0;
-    transition: color 0.2s ease;
+    transition: color var(--transition);
   }
 
-  .footer-col a:hover {
-    color: var(--gold);
-  }
+  .footer-col a:hover { color: var(--gold); }
 
   .footer-bottom {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding-top: 24px;
+    padding-top: 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 12px;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.2);
   }
 
   .footer-credit a {
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.3);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color var(--transition);
   }
 
-  .footer-credit a:hover {
-    color: var(--gold);
-  }
+  .footer-credit a:hover { color: var(--gold); }
 
-  /* ════════════════════════════════════════
-     SCROLL ANIMATIONS
-     ════════════════════════════════════════ */
+  /* ═══════ ANIMATIONS ═══════ */
 
-  .fade-up {
+  .reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transform: translateY(28px);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  .fade-up.visible {
+  .reveal.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  /* ════════════════════════════════════════
-     MOBILE RESPONSIVE
-     ════════════════════════════════════════ */
+  /* ═══════ RESPONSIVE ═══════ */
+
+  @media (max-width: 1024px) {
+    nav { padding: 0 32px; }
+    .hero { padding: 0 32px; }
+    section { padding: 80px 32px; }
+    .hero-grid { gap: 48px; }
+    .hero h1 { font-size: 48px; }
+    .about-grid { gap: 56px; }
+  }
 
   @media (max-width: 900px) {
-    nav { padding: 0 24px; }
-
     .hamburger { display: flex; }
 
     .nav-links {
       position: fixed;
       top: 0;
       right: -100%;
-      width: 280px;
+      width: 300px;
       height: 100vh;
       background: var(--white);
       flex-direction: column;
-      padding: 100px 32px 32px;
+      padding: 100px 36px 36px;
       gap: 20px;
       transition: right 0.3s ease;
-      box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+      box-shadow: -8px 0 32px rgba(0,0,0,0.08);
     }
 
     .nav-links.open { right: 0; }
-    .nav-links a { font-size: 16px; color: var(--text-dark); }
-    .nav-cta { text-align: center; margin-top: 12px; }
+    .nav-links a { font-size: 16px; color: var(--text-primary) !important; }
+    .nav-cta { background: var(--navy) !important; border-color: var(--navy) !important; color: var(--white) !important; text-align: center; margin-top: 12px; }
 
-    section { padding: 64px 24px; }
-
-    .hero { padding: 72px 24px 80px; }
+    section { padding: 72px 24px; }
+    .hero { padding: 0 24px; min-height: auto; padding-top: 120px; padding-bottom: 80px; }
     .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .hero h1 { font-size: 38px; }
-    .hero p { font-size: 16px; }
+    .hero h1 { font-size: 40px; letter-spacing: -1.5px; }
+    .hero-sub { font-size: 16px; }
 
-    .services-grid { grid-template-columns: 1fr; gap: 16px; }
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-image { height: 300px; }
-    .process-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
-    .testimonials-grid { grid-template-columns: 1fr; }
-    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-    .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+    .services-grid { grid-template-columns: 1fr; gap: 12px; }
+    .about-grid { grid-template-columns: 1fr; gap: 48px; }
+    .process-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .testimonials-grid { grid-template-columns: 1fr; gap: 12px; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; gap: 16px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
 
-    .section-header h2 { font-size: 30px; }
-    .about-content h2 { font-size: 30px; }
+    .section-header h2 { font-size: 32px; }
+    .about-content h2 { font-size: 32px; }
 
-    .trust-logos { gap: 24px; }
+    .trust-inner { gap: 24px; }
+    .trust-bar { padding: 32px 24px; }
+    .trust-divider { display: none; }
 
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
 
-    .cta-banner { padding: 48px 24px; }
-    .cta-banner h2 { font-size: 26px; }
+    .cta-banner { padding: 64px 24px; }
+    .cta-banner h2 { font-size: 28px; }
   }
 
   @media (max-width: 480px) {
-    .hero h1 { font-size: 30px; }
-    .hero-buttons { flex-direction: column; }
-    .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
-    .hero-stat-row { flex-direction: column; gap: 24px; }
+    .hero h1 { font-size: 32px; letter-spacing: -1px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+    .hero-metrics { grid-template-columns: 1fr; gap: 16px; }
     .process-grid { grid-template-columns: 1fr; }
-    .about-stats-row { flex-direction: column; gap: 20px; }
+    .about-stats { grid-template-columns: 1fr; gap: 16px; }
     .form-row { grid-template-columns: 1fr; }
   }
 </style>
@@ -1389,17 +1396,16 @@
 <body>
 
 <!-- NAVIGATION -->
-
 <nav id="navbar">
   <a href="#home" class="nav-logo">
     <div class="logo-mark">C</div>
     Clearview
   </a>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#home" onclick="closeMenu()">Home</a></li>
     <li><a href="#services" onclick="closeMenu()">Services</a></li>
     <li><a href="#about" onclick="closeMenu()">About</a></li>
     <li><a href="#pricing" onclick="closeMenu()">Pricing</a></li>
+    <li><a href="#testimonials" onclick="closeMenu()">Reviews</a></li>
     <li><a href="#contact" onclick="closeMenu()" class="nav-cta">Free Consultation</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
@@ -1410,66 +1416,61 @@
 </nav>
 
 <!-- HERO -->
-
 <section class="hero" id="home">
   <div class="hero-grid">
     <div class="hero-content">
-      <div class="hero-badge">
-        <div class="hero-badge-dot"></div>
+      <div class="hero-label">
+        <span class="hero-label-line"></span>
         Chartered Accountants
       </div>
-      <h1>Your numbers, <span>sorted.</span></h1>
-      <p>Small business accounting, tax returns, and bookkeeping that actually makes sense. We handle the numbers so you can focus on growing your business.</p>
-      <div class="hero-buttons">
-        <a href="#contact" class="btn-primary">Book a Free Chat &#8594;</a>
-        <a href="#services" class="btn-secondary">See Our Services</a>
+      <h1>Your numbers, <strong>sorted.</strong></h1>
+      <p class="hero-sub">Small business accounting, tax returns, and bookkeeping that actually makes sense. We handle the numbers so you can focus on growing your business.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a free call &#8594;</a>
+        <a href="#services" class="btn-ghost">View services &#8594;</a>
       </div>
     </div>
     <div class="hero-visual">
       <div class="hero-card">
-        <div class="hero-card-grid">
-          <div class="hero-stat-row">
-            <div class="hero-stat">
-              <div class="hero-stat-value">$47K</div>
-              <div class="hero-stat-label">Tax Saved</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat-value">99.8%</div>
-              <div class="hero-stat-label">Accuracy</div>
-            </div>
-            <div class="hero-stat">
-              <div class="hero-stat-value">48hr</div>
-              <div class="hero-stat-label">Turnaround</div>
-            </div>
+        <div class="hero-metrics">
+          <div class="hero-metric">
+            <div class="hero-metric-label">Tax saved (FY26)</div>
+            <div class="hero-metric-value">$<span class="accent">47</span>K</div>
+            <div class="hero-metric-change">&#9650; 12% vs last year</div>
           </div>
-          <div class="hero-chart">
-            <div class="hero-chart-title">Annual Revenue Overview</div>
-            <div class="chart-bars">
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-              <div class="chart-bar"></div>
-            </div>
-            <div class="chart-labels">
-              <span>Jan</span>
-              <span>Apr</span>
-              <span>Jul</span>
-              <span>Oct</span>
-              <span>Dec</span>
-            </div>
+          <div class="hero-metric">
+            <div class="hero-metric-label">Filing accuracy</div>
+            <div class="hero-metric-value">99.8<span class="accent">%</span></div>
+            <div class="hero-metric-change">&#9650; Zero IRD penalties</div>
           </div>
-          <div class="hero-card-bottom">
-            <span class="hero-card-tag">FY2026 Projection</span>
-            <span class="hero-card-amount">$842,500</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-bar-chart">
+          <div class="hero-bar-label">Monthly revenue</div>
+          <div class="bar-row">
+            <span class="bar-label">Q1</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 45%"></div></div>
+            <span class="bar-amount">$68,200</span>
           </div>
+          <div class="bar-row">
+            <span class="bar-label">Q2</span>
+            <div class="bar-track"><div class="bar-fill" style="width: 62%"></div></div>
+            <span class="bar-amount">$94,100</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Q3</span>
+            <div class="bar-track"><div class="bar-fill highlight" style="width: 78%"></div></div>
+            <span class="bar-amount">$118,400</span>
+          </div>
+          <div class="bar-row">
+            <span class="bar-label">Q4</span>
+            <div class="bar-track"><div class="bar-fill highlight" style="width: 92%"></div></div>
+            <span class="bar-amount">$139,800</span>
+          </div>
+        </div>
+        <div class="hero-card-footer">
+          <span class="hero-card-tag">FY2026 Overview</span>
+          <span class="hero-card-total">Total <span>$420,500</span></span>
         </div>
       </div>
     </div>
@@ -1477,62 +1478,62 @@
 </section>
 
 <!-- TRUST BAR -->
-
-<div class="trust-bar fade-up">
-  <p>Trusted by 300+ New Zealand businesses</p>
-  <div class="trust-logos">
-    <span class="trust-logo">XERO</span>
-    <span class="trust-logo">MYOB</span>
-    <span class="trust-logo">IRD APPROVED</span>
-    <span class="trust-logo">NZICA</span>
-    <span class="trust-logo">CA ANZ</span>
+<div class="trust-bar reveal">
+  <div class="trust-inner">
+    <span class="trust-label">Trusted by 300+ NZ businesses</span>
+    <div class="trust-divider"></div>
+    <div class="trust-logos">
+      <span class="trust-logo">XERO</span>
+      <span class="trust-logo">MYOB</span>
+      <span class="trust-logo">IRD APPROVED</span>
+      <span class="trust-logo">CA ANZ</span>
+    </div>
   </div>
 </div>
 
 <!-- SERVICES -->
-
 <section id="services">
   <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-label">What We Do</div>
-      <h2>Accounting that works as hard as you do</h2>
-      <p>From day-to-day bookkeeping to complex tax strategy, we've got the expertise to keep your business on track.</p>
+    <div class="section-header reveal">
+      <div class="section-label"><span class="label-line"></span> What We Do <span class="label-line"></span></div>
+      <h2>Accounting that works<br>as hard as you do</h2>
+      <p>From day-to-day bookkeeping to complex tax strategy, we keep your business on track.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card fade-up">
+      <div class="service-card reveal">
         <div class="service-icon">&#128200;</div>
         <h3>Tax Returns</h3>
-        <p>Individual, company, and trust tax returns filed on time, every time. We find every deduction you're entitled to and make sure you're not paying a cent more than you need to.</p>
+        <p>Individual, company, and trust returns filed on time, every time. We find every deduction you're entitled to.</p>
         <a href="#contact" class="service-link">Learn more &#8594;</a>
       </div>
-      <div class="service-card fade-up" style="transition-delay: 0.05s">
+      <div class="service-card reveal">
         <div class="service-icon">&#128218;</div>
         <h3>Bookkeeping</h3>
-        <p>Weekly or monthly bookkeeping to keep your accounts clean and your GST returns accurate. We work with Xero, MYOB, and QuickBooks &#8212; whichever you prefer.</p>
+        <p>Weekly or monthly bookkeeping to keep your accounts clean and your GST returns accurate. Xero, MYOB, or QuickBooks.</p>
         <a href="#contact" class="service-link">Learn more &#8594;</a>
       </div>
-      <div class="service-card fade-up" style="transition-delay: 0.1s">
+      <div class="service-card reveal">
         <div class="service-icon">&#127919;</div>
         <h3>Business Advisory</h3>
-        <p>Growth strategy, cash flow forecasting, and business structure advice. We don't just report on the past &#8212; we help you plan for the future.</p>
+        <p>Growth strategy, cash flow forecasting, and business structure advice. We help you plan for what's next.</p>
         <a href="#contact" class="service-link">Learn more &#8594;</a>
       </div>
-      <div class="service-card fade-up" style="transition-delay: 0.15s">
+      <div class="service-card reveal">
         <div class="service-icon">&#128176;</div>
         <h3>Payroll</h3>
-        <p>PAYE, KiwiSaver, and employee leave &#8212; all handled. Payslips go out on time, IRD filings are sorted, and your team gets paid correctly every fortnight.</p>
+        <p>PAYE, KiwiSaver, and employee leave handled. Payslips go out on time, IRD filings sorted, every fortnight.</p>
         <a href="#contact" class="service-link">Learn more &#8594;</a>
       </div>
-      <div class="service-card fade-up" style="transition-delay: 0.2s">
+      <div class="service-card reveal">
         <div class="service-icon">&#127970;</div>
         <h3>Company Formation</h3>
-        <p>Setting up an LTC, LAQC, or standard company? We handle the Companies Office registration, IRD numbers, GST registration, and shareholder agreements.</p>
+        <p>LTC, LAQC, or standard company setup. Companies Office registration, IRD numbers, GST, shareholder agreements.</p>
         <a href="#contact" class="service-link">Learn more &#8594;</a>
       </div>
-      <div class="service-card fade-up" style="transition-delay: 0.25s">
+      <div class="service-card reveal">
         <div class="service-icon">&#128270;</div>
         <h3>IRD Audit Support</h3>
-        <p>If the IRD comes knocking, we've got your back. Full representation, document preparation, and negotiation to resolve issues quickly and fairly.</p>
+        <p>Full representation, document preparation, and negotiation to resolve issues quickly and fairly.</p>
         <a href="#contact" class="service-link">Learn more &#8594;</a>
       </div>
     </div>
@@ -1540,38 +1541,39 @@
 </section>
 
 <!-- ABOUT -->
-
 <section id="about">
   <div class="container">
     <div class="about-grid">
-      <div class="about-content fade-up">
-        <div class="section-label">Why Clearview</div>
+      <div class="about-content reveal">
+        <div class="section-label"><span class="label-line"></span> Why Clearview</div>
         <h2>Accounting without the jargon</h2>
         <p>We started Clearview because we were tired of seeing small business owners overpay on tax, stress about compliance deadlines, and get vague advice from accountants who didn't understand their business.</p>
-        <p>Our team speaks plain English, responds within 24 hours, and genuinely cares about your bottom line. We're not a big corporate firm &#8212; we're a small team that treats your business like our own.</p>
+        <p>Our team speaks plain English, responds within 24 hours, and genuinely cares about your bottom line.</p>
         <ul class="about-checklist">
           <li><span class="check-icon">&#10003;</span> Fixed fees &#8212; no surprise invoices, ever</li>
-          <li><span class="check-icon">&#10003;</span> Cloud-based &#8212; access your accounts from anywhere</li>
+          <li><span class="check-icon">&#10003;</span> Cloud-based &#8212; access your accounts anywhere</li>
           <li><span class="check-icon">&#10003;</span> Proactive advice &#8212; we flag opportunities, not just problems</li>
           <li><span class="check-icon">&#10003;</span> All responses within 24 hours, guaranteed</li>
         </ul>
       </div>
-      <div class="about-image fade-up">
-        <div class="about-brand-icon">C</div>
-        <div class="about-brand-name">Clearview Accounting</div>
-        <div class="about-brand-tagline">Est. 2018 &#183; Auckland</div>
-        <div class="about-stats-row">
-          <div class="about-stat">
-            <div class="about-stat-value">300+</div>
-            <div class="about-stat-label">Clients</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-value">8</div>
-            <div class="about-stat-label">Years</div>
-          </div>
-          <div class="about-stat">
-            <div class="about-stat-value">$12M</div>
-            <div class="about-stat-label">Tax Saved</div>
+      <div class="about-visual reveal">
+        <div class="about-brand">
+          <div class="about-brand-icon">C</div>
+          <div class="about-brand-name">Clearview Accounting</div>
+          <div class="about-brand-tagline">Est. 2018 &#183; Auckland</div>
+          <div class="about-stats">
+            <div class="about-stat">
+              <div class="about-stat-value">300+</div>
+              <div class="about-stat-label">Clients</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-value">8</div>
+              <div class="about-stat-label">Years</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-value">$12M</div>
+              <div class="about-stat-label">Tax Saved</div>
+            </div>
           </div>
         </div>
       </div>
@@ -1580,51 +1582,49 @@
 </section>
 
 <!-- PROCESS -->
-
 <section id="process">
   <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-label">How It Works</div>
-      <h2>Getting started takes 15 minutes</h2>
+    <div class="section-header reveal">
+      <div class="section-label"><span class="label-line"></span> How It Works <span class="label-line"></span></div>
+      <h2>Getting started takes<br>15 minutes</h2>
       <p>No long onboarding process. No paperwork headaches. Here's how we get you sorted.</p>
     </div>
     <div class="process-grid">
-      <div class="process-step fade-up">
+      <div class="process-step reveal">
         <div class="process-number">1</div>
         <h3>Free Chat</h3>
-        <p>We have a 15-minute call to understand your business, your pain points, and what you need.</p>
+        <p>15-minute call to understand your business, your pain points, and what you need.</p>
       </div>
-      <div class="process-step fade-up" style="transition-delay: 0.1s">
+      <div class="process-step reveal">
         <div class="process-number">2</div>
         <h3>Fixed Quote</h3>
-        <p>You get a clear, fixed-fee quote within 24 hours. No hidden costs, no hourly surprises.</p>
+        <p>Clear, fixed-fee quote within 24 hours. No hidden costs, no hourly surprises.</p>
       </div>
-      <div class="process-step fade-up" style="transition-delay: 0.2s">
+      <div class="process-step reveal">
         <div class="process-number">3</div>
         <h3>We Get to Work</h3>
         <p>We connect to your Xero or MYOB, set up your accounts, and start sorting your books.</p>
       </div>
-      <div class="process-step fade-up" style="transition-delay: 0.3s">
+      <div class="process-step reveal">
         <div class="process-number">4</div>
         <h3>Stay on Track</h3>
-        <p>Monthly check-ins, quarterly reviews, and proactive advice to keep you ahead of the game.</p>
+        <p>Monthly check-ins, quarterly reviews, and proactive advice to keep you ahead.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-
 <section id="testimonials">
   <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-label">Client Stories</div>
+    <div class="section-header reveal">
+      <div class="section-label"><span class="label-line"></span> Client Stories <span class="label-line"></span></div>
       <h2>What our clients say</h2>
       <p>Don't take our word for it &#8212; here's what business owners across Auckland have to say.</p>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card fade-up">
-        <div class="testimonial-quote">&#8220;</div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testimonial-text">Switched to Clearview after 5 years with a big firm. Night and day difference. They actually explain things in plain English and found $8K in deductions my old accountant missed.</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">R</div>
@@ -1634,8 +1634,8 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card fade-up" style="transition-delay: 0.1s">
-        <div class="testimonial-quote">&#8220;</div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testimonial-text">I used to dread tax season. Now I don't even think about it because Clearview has everything sorted months in advance. Their fixed pricing means no bill shock either.</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">D</div>
@@ -1645,8 +1645,8 @@
           </div>
         </div>
       </div>
-      <div class="testimonial-card fade-up" style="transition-delay: 0.2s">
-        <div class="testimonial-quote">&#8220;</div>
+      <div class="testimonial-card reveal">
+        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
         <p class="testimonial-text">Clearview helped us restructure from a sole trader to an LTC and it's saved us thousands every year. They explained every option and let us make the call. No pressure, just good advice.</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">K</div>
@@ -1661,16 +1661,15 @@
 </section>
 
 <!-- PRICING -->
-
 <section id="pricing">
   <div class="container">
-    <div class="section-header fade-up">
-      <div class="section-label">Pricing</div>
+    <div class="section-header reveal">
+      <div class="section-label"><span class="label-line"></span> Pricing <span class="label-line"></span></div>
       <h2>Simple, fixed monthly pricing</h2>
-      <p>No hourly rates. No bill shock. Pick the plan that fits your business and know exactly what you'll pay.</p>
+      <p>No hourly rates. No bill shock. Pick the plan that fits your business.</p>
     </div>
     <div class="pricing-grid">
-      <div class="pricing-card fade-up">
+      <div class="pricing-card reveal">
         <h3>Sole Trader</h3>
         <p class="pricing-desc">For freelancers and sole traders</p>
         <div class="pricing-price">$150</div>
@@ -1684,7 +1683,7 @@
         </ul>
         <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started</a>
       </div>
-      <div class="pricing-card featured fade-up" style="transition-delay: 0.1s">
+      <div class="pricing-card featured reveal">
         <div class="pricing-badge">Most Popular</div>
         <h3>Small Business</h3>
         <p class="pricing-desc">For companies doing $200K&#8211;$2M</p>
@@ -1699,7 +1698,7 @@
         </ul>
         <a href="#contact" class="pricing-btn pricing-btn-gold">Get Started</a>
       </div>
-      <div class="pricing-card fade-up" style="transition-delay: 0.2s">
+      <div class="pricing-card reveal">
         <h3>Growth</h3>
         <p class="pricing-desc">For scaling businesses $2M+</p>
         <div class="pricing-price">$650</div>
@@ -1717,20 +1716,18 @@
   </div>
 </section>
 
-<!-- CTA BANNER -->
-
+<!-- CTA -->
 <div class="cta-banner">
   <h2>Ready to get your numbers sorted?</h2>
   <p>Book a free 15-minute call. No obligation, no jargon &#8212; just a straight conversation about your business.</p>
-  <a href="#contact" class="btn-white">Book Your Free Call &#8594;</a>
+  <a href="#contact" class="btn-gold">Book your free call &#8594;</a>
 </div>
 
 <!-- CONTACT -->
-
 <section id="contact">
   <div class="container">
     <div class="contact-grid">
-      <div class="contact-form fade-up">
+      <div class="contact-form reveal">
         <form onsubmit="event.preventDefault(); alert('Demo form — not connected to a backend.')">
           <div class="form-row">
             <div class="form-group">
@@ -1769,9 +1766,9 @@
           <button type="submit" class="form-submit">Book Free Consultation &#8594;</button>
         </form>
       </div>
-      <div class="contact-info fade-up">
+      <div class="contact-info reveal">
         <h3>Let's talk numbers</h3>
-        <p>Whether you're starting a business, switching accountants, or just want a second opinion on your tax situation &#8212; we're here to help.</p>
+        <p>Whether you're starting a business, switching accountants, or just want a second opinion &#8212; we're here to help.</p>
         <div class="contact-detail">
           <div class="contact-detail-icon">&#9742;</div>
           <div class="contact-detail-text">
@@ -1794,10 +1791,10 @@
           </div>
         </div>
         <div class="contact-guarantee">
-          <div class="guarantee-icon">&#128170;</div>
+          <div class="guarantee-icon">&#9899;</div>
           <div>
             <h4>Our fixed-fee guarantee</h4>
-            <p>The price we quote is the price you pay. If the scope changes, we'll talk about it first &#8212; never just send a bigger invoice.</p>
+            <p>The price we quote is the price you pay. If the scope changes, we talk about it first &#8212; never just send a bigger invoice.</p>
           </div>
         </div>
       </div>
@@ -1806,7 +1803,6 @@
 </section>
 
 <!-- FOOTER -->
-
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -1843,7 +1839,6 @@
 </footer>
 
 <!-- SCRIPTS -->
-
 <script>
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
@@ -1857,7 +1852,7 @@
 
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
-    if (window.scrollY > 20) {
+    if (window.scrollY > 40) {
       nav.classList.add('scrolled');
     } else {
       nav.classList.remove('scrolled');
@@ -1871,11 +1866,11 @@
       }
     });
   }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -60px 0px'
   });
 
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
 </body>
