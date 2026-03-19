@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clearview Accounting — Small Business Accounting & Tax, Auckland</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@600;700;800&display=swap');
+
+  :root {
+    --forest: #1a3a2a;
+    --forest-light: #234a36;
+    --forest-mid: #2d5a42;
+    --gold: #c4a35a;
+    --gold-light: #d4b76e;
+    --gold-dark: #a88a42;
+    --sand: #f8f6f1;
+    --sand-dark: #eee9e0;
+    --white: #ffffff;
+    --text-dark: #1c1c1c;
+    --text-mid: #505050;
+    --text-light: #858585;
+    --text-on-dark: #bfbdab;
+    --radius: 8px;
+    --shadow: 0 2px 16px rgba(26,58,42,0.06);
+    --shadow-lg: 0 12px 40px rgba(26,58,42,0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: var(--sand);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ════════════════════════════════════════
+     NAVIGATION
+     ════════════════════════════════════════ */
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--white);
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    transition: box-shadow 0.3s ease;
+  }
+
+  nav.scrolled {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--forest);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-logo .logo-mark {
+    width: 34px;
+    height: 34px;
+    background: var(--forest);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--gold);
+    font-weight: 800;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--text-mid);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--forest);
+  }
+
+  .nav-cta {
+    background: var(--forest) !important;
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: var(--radius);
+    font-weight: 600 !important;
+    transition: background 0.2s ease, transform 0.2s ease !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--forest-light) !important;
+    transform: translateY(-1px);
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+  }
+
+  .hamburger span {
+    width: 24px;
+    height: 2px;
+    background: var(--forest);
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+
+  /* ════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════ */
+
+  .hero {
+    margin-top: 72px;
+    padding: 100px 48px 120px;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+
+  .hero-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(26,58,42,0.06);
+    color: var(--forest);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .hero-badge-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 52px;
+    line-height: 1.1;
+    color: var(--forest);
+    margin-bottom: 24px;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .hero h1 span {
+    color: var(--gold-dark);
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 36px;
+    max-width: 480px;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--forest);
+    color: var(--white);
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    border: none;
+    cursor: pointer;
+  }
+
+  .btn-primary:hover {
+    background: var(--forest-light);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(26,58,42,0.25);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--forest);
+    padding: 16px 32px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 15px;
+    border: 2px solid rgba(26,58,42,0.15);
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--forest);
+    background: rgba(26,58,42,0.03);
+  }
+
+  .hero-visual {
+    position: relative;
+    animation: fadeUp 0.8s ease 0.2s both;
+  }
+
+  .hero-card {
+    background: var(--forest);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(196,163,90,0.08) 0%, transparent 60%);
+  }
+
+  .hero-card-grid {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-stat-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+  }
+
+  .hero-stat {
+    text-align: center;
+  }
+
+  .hero-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .hero-stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  .hero-chart {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+
+  .hero-chart-title {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 80px;
+  }
+
+  .chart-bar {
+    flex: 1;
+    background: rgba(196,163,90,0.3);
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: background 0.3s ease;
+  }
+
+  .chart-bar:nth-child(1) { height: 45%; }
+  .chart-bar:nth-child(2) { height: 55%; }
+  .chart-bar:nth-child(3) { height: 40%; }
+  .chart-bar:nth-child(4) { height: 70%; }
+  .chart-bar:nth-child(5) { height: 60%; }
+  .chart-bar:nth-child(6) { height: 85%; background: var(--gold); }
+  .chart-bar:nth-child(7) { height: 75%; }
+  .chart-bar:nth-child(8) { height: 65%; }
+  .chart-bar:nth-child(9) { height: 90%; background: var(--gold); }
+  .chart-bar:nth-child(10) { height: 80%; }
+  .chart-bar:nth-child(11) { height: 95%; background: var(--gold); }
+  .chart-bar:nth-child(12) { height: 100%; background: var(--gold-light); }
+
+  .chart-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  .chart-labels span {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.5px;
+  }
+
+  .hero-card-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 4px;
+  }
+
+  .hero-card-tag {
+    font-size: 12px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+  }
+
+  .hero-card-amount {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--white);
+  }
+
+  /* ════════════════════════════════════════
+     TRUST BAR
+     ════════════════════════════════════════ */
+
+  .trust-bar {
+    background: var(--sand);
+    padding: 48px;
+    text-align: center;
+  }
+
+  .trust-bar p {
+    font-size: 13px;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  .trust-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+    flex-wrap: wrap;
+  }
+
+  .trust-logo {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--text-light);
+    opacity: 0.5;
+    letter-spacing: 1px;
+  }
+
+  /* ════════════════════════════════════════
+     SECTION SHARED
+     ════════════════════════════════════════ */
+
+  section {
+    padding: 96px 48px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 14px;
+  }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 40px;
+    color: var(--forest);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .section-header p {
+    font-size: 17px;
+    color: var(--text-mid);
+    max-width: 540px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* ════════════════════════════════════════
+     SERVICES
+     ════════════════════════════════════════ */
+
+  #services {
+    background: var(--sand);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .service-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(26,58,42,0.06);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--forest);
+    margin-bottom: 12px;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .service-card .service-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--forest);
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .service-card:hover .service-link {
+    gap: 10px;
+  }
+
+  /* ════════════════════════════════════════
+     ABOUT / WHY US
+     ════════════════════════════════════════ */
+
+  #about {
+    background: var(--white);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-content .section-label {
+    text-align: left;
+  }
+
+  .about-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--forest);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .about-content p {
+    color: var(--text-mid);
+    margin-bottom: 16px;
+    line-height: 1.75;
+  }
+
+  .about-checklist {
+    list-style: none;
+    margin-top: 24px;
+  }
+
+  .about-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    font-size: 15px;
+    color: var(--text-mid);
+  }
+
+  .check-icon {
+    width: 24px;
+    height: 24px;
+    background: rgba(26,58,42,0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: var(--forest);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .about-image {
+    background: linear-gradient(145deg, var(--forest) 0%, var(--forest-light) 60%, var(--forest-mid) 100%);
+    border-radius: 16px;
+    height: 460px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 40px,
+        rgba(255,255,255,0.015) 40px,
+        rgba(255,255,255,0.015) 41px
+      );
+  }
+
+  .about-image::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gold);
+  }
+
+  .about-brand-icon {
+    width: 80px;
+    height: 80px;
+    background: rgba(196,163,90,0.15);
+    border: 2px solid rgba(196,163,90,0.3);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 36px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-brand-name {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 28px;
+    color: var(--white);
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-brand-tagline {
+    font-size: 13px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+    font-weight: 500;
+  }
+
+  .about-stats-row {
+    display: flex;
+    gap: 48px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-stat {
+    text-align: center;
+  }
+
+  .about-stat-value {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 32px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .about-stat-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 6px;
+  }
+
+  /* ════════════════════════════════════════
+     PROCESS
+     ════════════════════════════════════════ */
+
+  #process {
+    background: var(--forest);
+    position: relative;
+  }
+
+  #process .section-label {
+    color: var(--gold);
+  }
+
+  #process .section-header h2 {
+    color: var(--white);
+  }
+
+  #process .section-header p {
+    color: var(--text-on-dark);
+  }
+
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .process-step {
+    text-align: center;
+    position: relative;
+    padding: 0 12px;
+  }
+
+  .process-number {
+    width: 56px;
+    height: 56px;
+    background: rgba(196,163,90,0.12);
+    border: 2px solid rgba(196,163,90,0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--gold);
+    margin: 0 auto 20px;
+  }
+
+  .process-step h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .process-step p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.65;
+  }
+
+  /* ════════════════════════════════════════
+     TESTIMONIALS
+     ════════════════════════════════════════ */
+
+  #testimonials {
+    background: var(--white);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .testimonial-card {
+    background: var(--sand);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.25s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .testimonial-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+    opacity: 0.4;
+  }
+
+  .testimonial-text {
+    font-size: 15px;
+    color: var(--text-mid);
+    line-height: 1.75;
+    margin-bottom: 24px;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--white);
+    flex-shrink: 0;
+  }
+
+  .testimonial-card:nth-child(1) .testimonial-avatar { background: var(--forest); }
+  .testimonial-card:nth-child(2) .testimonial-avatar { background: var(--gold-dark); }
+  .testimonial-card:nth-child(3) .testimonial-avatar { background: #5a6a7a; }
+
+  .testimonial-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--forest);
+  }
+
+  .testimonial-role {
+    font-size: 13px;
+    color: var(--text-light);
+  }
+
+  /* ════════════════════════════════════════
+     PRICING
+     ════════════════════════════════════════ */
+
+  #pricing {
+    background: var(--sand);
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .pricing-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .pricing-card.featured {
+    background: var(--forest);
+    border-color: transparent;
+  }
+
+  .pricing-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 20px;
+  }
+
+  .pricing-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .pricing-card .pricing-desc {
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+
+  .pricing-price {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 44px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .pricing-period {
+    font-size: 14px;
+    margin-bottom: 28px;
+  }
+
+  .pricing-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 28px;
+  }
+
+  .pricing-features li {
+    padding: 8px 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .pricing-features li::before {
+    content: '\2713';
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  /* Default card colors */
+  .pricing-card h3 { color: var(--forest); }
+  .pricing-card .pricing-desc { color: var(--text-light); }
+  .pricing-card .pricing-price { color: var(--forest); }
+  .pricing-card .pricing-period { color: var(--text-light); }
+  .pricing-card .pricing-features li { color: var(--text-mid); }
+  .pricing-card .pricing-features li::before { color: var(--forest); }
+
+  /* Featured card colors */
+  .pricing-card.featured h3 { color: var(--white); }
+  .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.5); }
+  .pricing-card.featured .pricing-price { color: var(--gold); }
+  .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.4); }
+  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.7); }
+  .pricing-card.featured .pricing-features li::before { color: var(--gold); }
+
+  .pricing-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.2s ease;
+  }
+
+  .pricing-btn-outline {
+    background: transparent;
+    color: var(--forest);
+    border: 2px solid rgba(26,58,42,0.15);
+  }
+
+  .pricing-btn-outline:hover {
+    border-color: var(--forest);
+    background: rgba(26,58,42,0.03);
+  }
+
+  .pricing-btn-gold {
+    background: var(--gold);
+    color: var(--white);
+    border: 2px solid var(--gold);
+  }
+
+  .pricing-btn-gold:hover {
+    background: var(--gold-light);
+    border-color: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  /* ════════════════════════════════════════
+     CONTACT
+     ════════════════════════════════════════ */
+
+  #contact {
+    background: var(--white);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+
+  .contact-form {
+    background: var(--sand);
+    padding: 40px;
+    border-radius: var(--radius);
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--forest);
+    margin-bottom: 6px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid var(--sand-dark);
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    color: var(--text-dark);
+    transition: border-color 0.2s ease;
+    background: var(--white);
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--forest);
+  }
+
+  .form-group textarea {
+    height: 100px;
+    resize: vertical;
+  }
+
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--forest);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .form-submit:hover {
+    background: var(--forest-light);
+    transform: translateY(-1px);
+  }
+
+  .contact-info {
+    padding-top: 8px;
+  }
+
+  .contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: var(--forest);
+    margin-bottom: 8px;
+  }
+
+  .contact-info > p {
+    color: var(--text-mid);
+    margin-bottom: 36px;
+    line-height: 1.7;
+  }
+
+  .contact-detail {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+
+  .contact-detail-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(26,58,42,0.06);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .contact-detail-text strong {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--forest);
+    margin-bottom: 2px;
+  }
+
+  .contact-detail-text span {
+    font-size: 14px;
+    color: var(--text-mid);
+  }
+
+  .contact-guarantee {
+    background: var(--sand);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-top: 36px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  .guarantee-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .contact-guarantee h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--forest);
+    margin-bottom: 4px;
+  }
+
+  .contact-guarantee p {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+  }
+
+  /* ════════════════════════════════════════
+     CTA BANNER
+     ════════════════════════════════════════ */
+
+  .cta-banner {
+    background: var(--gold);
+    padding: 64px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%);
+  }
+
+  .cta-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 34px;
+    color: var(--white);
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .cta-banner p {
+    color: rgba(255,255,255,0.85);
+    font-size: 17px;
+    margin-bottom: 28px;
+    position: relative;
+  }
+
+  .cta-banner .btn-white {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    color: var(--gold-dark);
+    padding: 16px 36px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  .cta-banner .btn-white:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  }
+
+  /* ════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════ */
+
+  footer {
+    background: var(--forest);
+    padding: 64px 48px 32px;
+    color: var(--text-on-dark);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 48px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-brand h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .footer-brand p {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+    max-width: 280px;
+  }
+
+  .footer-col h4 {
+    font-weight: 700;
+    font-size: 12px;
+    color: var(--white);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+  }
+
+  .footer-col a {
+    display: block;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    font-size: 14px;
+    padding: 5px 0;
+    transition: color 0.2s ease;
+  }
+
+  .footer-col a:hover {
+    color: var(--gold);
+  }
+
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.25);
+  }
+
+  .footer-credit a {
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer-credit a:hover {
+    color: var(--gold);
+  }
+
+  /* ════════════════════════════════════════
+     SCROLL ANIMATIONS
+     ════════════════════════════════════════ */
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ════════════════════════════════════════
+     MOBILE RESPONSIVE
+     ════════════════════════════════════════ */
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+
+    .hamburger { display: flex; }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: var(--white);
+      flex-direction: column;
+      padding: 100px 32px 32px;
+      gap: 20px;
+      transition: right 0.3s ease;
+      box-shadow: -4px 0 24px rgba(0,0,0,0.1);
+    }
+
+    .nav-links.open { right: 0; }
+    .nav-links a { font-size: 16px; color: var(--text-dark); }
+    .nav-cta { text-align: center; margin-top: 12px; }
+
+    section { padding: 64px 24px; }
+
+    .hero { padding: 72px 24px 80px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero h1 { font-size: 38px; }
+    .hero p { font-size: 16px; }
+
+    .services-grid { grid-template-columns: 1fr; gap: 16px; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-image { height: 300px; }
+    .process-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+    .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+
+    .section-header h2 { font-size: 30px; }
+    .about-content h2 { font-size: 30px; }
+
+    .trust-logos { gap: 24px; }
+
+    .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+
+    .cta-banner { padding: 48px 24px; }
+    .cta-banner h2 { font-size: 26px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 30px; }
+    .hero-buttons { flex-direction: column; }
+    .btn-primary, .btn-secondary { text-align: center; justify-content: center; }
+    .hero-stat-row { flex-direction: column; gap: 24px; }
+    .process-grid { grid-template-columns: 1fr; }
+    .about-stats-row { flex-direction: column; gap: 20px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <div class="logo-mark">C</div>
+    Clearview
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" onclick="closeMenu()">Home</a></li>
+    <li><a href="#services" onclick="closeMenu()">Services</a></li>
+    <li><a href="#about" onclick="closeMenu()">About</a></li>
+    <li><a href="#pricing" onclick="closeMenu()">Pricing</a></li>
+    <li><a href="#contact" onclick="closeMenu()" class="nav-cta">Free Consultation</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <div class="hero-badge-dot"></div>
+        Chartered Accountants
+      </div>
+      <h1>Your numbers, <span>sorted.</span></h1>
+      <p>Small business accounting, tax returns, and bookkeeping that actually makes sense. We handle the numbers so you can focus on growing your business.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-primary">Book a Free Chat &#8594;</a>
+        <a href="#services" class="btn-secondary">See Our Services</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-grid">
+          <div class="hero-stat-row">
+            <div class="hero-stat">
+              <div class="hero-stat-value">$47K</div>
+              <div class="hero-stat-label">Tax Saved</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">99.8%</div>
+              <div class="hero-stat-label">Accuracy</div>
+            </div>
+            <div class="hero-stat">
+              <div class="hero-stat-value">48hr</div>
+              <div class="hero-stat-label">Turnaround</div>
+            </div>
+          </div>
+          <div class="hero-chart">
+            <div class="hero-chart-title">Annual Revenue Overview</div>
+            <div class="chart-bars">
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+              <div class="chart-bar"></div>
+            </div>
+            <div class="chart-labels">
+              <span>Jan</span>
+              <span>Apr</span>
+              <span>Jul</span>
+              <span>Oct</span>
+              <span>Dec</span>
+            </div>
+          </div>
+          <div class="hero-card-bottom">
+            <span class="hero-card-tag">FY2026 Projection</span>
+            <span class="hero-card-amount">$842,500</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+
+<div class="trust-bar fade-up">
+  <p>Trusted by 300+ New Zealand businesses</p>
+  <div class="trust-logos">
+    <span class="trust-logo">XERO</span>
+    <span class="trust-logo">MYOB</span>
+    <span class="trust-logo">IRD APPROVED</span>
+    <span class="trust-logo">NZICA</span>
+    <span class="trust-logo">CA ANZ</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+
+<section id="services">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">What We Do</div>
+      <h2>Accounting that works as hard as you do</h2>
+      <p>From day-to-day bookkeeping to complex tax strategy, we've got the expertise to keep your business on track.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon">&#128200;</div>
+        <h3>Tax Returns</h3>
+        <p>Individual, company, and trust tax returns filed on time, every time. We find every deduction you're entitled to and make sure you're not paying a cent more than you need to.</p>
+        <a href="#contact" class="service-link">Learn more &#8594;</a>
+      </div>
+      <div class="service-card fade-up" style="transition-delay: 0.05s">
+        <div class="service-icon">&#128218;</div>
+        <h3>Bookkeeping</h3>
+        <p>Weekly or monthly bookkeeping to keep your accounts clean and your GST returns accurate. We work with Xero, MYOB, and QuickBooks &#8212; whichever you prefer.</p>
+        <a href="#contact" class="service-link">Learn more &#8594;</a>
+      </div>
+      <div class="service-card fade-up" style="transition-delay: 0.1s">
+        <div class="service-icon">&#127919;</div>
+        <h3>Business Advisory</h3>
+        <p>Growth strategy, cash flow forecasting, and business structure advice. We don't just report on the past &#8212; we help you plan for the future.</p>
+        <a href="#contact" class="service-link">Learn more &#8594;</a>
+      </div>
+      <div class="service-card fade-up" style="transition-delay: 0.15s">
+        <div class="service-icon">&#128176;</div>
+        <h3>Payroll</h3>
+        <p>PAYE, KiwiSaver, and employee leave &#8212; all handled. Payslips go out on time, IRD filings are sorted, and your team gets paid correctly every fortnight.</p>
+        <a href="#contact" class="service-link">Learn more &#8594;</a>
+      </div>
+      <div class="service-card fade-up" style="transition-delay: 0.2s">
+        <div class="service-icon">&#127970;</div>
+        <h3>Company Formation</h3>
+        <p>Setting up an LTC, LAQC, or standard company? We handle the Companies Office registration, IRD numbers, GST registration, and shareholder agreements.</p>
+        <a href="#contact" class="service-link">Learn more &#8594;</a>
+      </div>
+      <div class="service-card fade-up" style="transition-delay: 0.25s">
+        <div class="service-icon">&#128270;</div>
+        <h3>IRD Audit Support</h3>
+        <p>If the IRD comes knocking, we've got your back. Full representation, document preparation, and negotiation to resolve issues quickly and fairly.</p>
+        <a href="#contact" class="service-link">Learn more &#8594;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-content fade-up">
+        <div class="section-label">Why Clearview</div>
+        <h2>Accounting without the jargon</h2>
+        <p>We started Clearview because we were tired of seeing small business owners overpay on tax, stress about compliance deadlines, and get vague advice from accountants who didn't understand their business.</p>
+        <p>Our team speaks plain English, responds within 24 hours, and genuinely cares about your bottom line. We're not a big corporate firm &#8212; we're a small team that treats your business like our own.</p>
+        <ul class="about-checklist">
+          <li><span class="check-icon">&#10003;</span> Fixed fees &#8212; no surprise invoices, ever</li>
+          <li><span class="check-icon">&#10003;</span> Cloud-based &#8212; access your accounts from anywhere</li>
+          <li><span class="check-icon">&#10003;</span> Proactive advice &#8212; we flag opportunities, not just problems</li>
+          <li><span class="check-icon">&#10003;</span> All responses within 24 hours, guaranteed</li>
+        </ul>
+      </div>
+      <div class="about-image fade-up">
+        <div class="about-brand-icon">C</div>
+        <div class="about-brand-name">Clearview Accounting</div>
+        <div class="about-brand-tagline">Est. 2018 &#183; Auckland</div>
+        <div class="about-stats-row">
+          <div class="about-stat">
+            <div class="about-stat-value">300+</div>
+            <div class="about-stat-label">Clients</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-value">8</div>
+            <div class="about-stat-label">Years</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat-value">$12M</div>
+            <div class="about-stat-label">Tax Saved</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+
+<section id="process">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">How It Works</div>
+      <h2>Getting started takes 15 minutes</h2>
+      <p>No long onboarding process. No paperwork headaches. Here's how we get you sorted.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-step fade-up">
+        <div class="process-number">1</div>
+        <h3>Free Chat</h3>
+        <p>We have a 15-minute call to understand your business, your pain points, and what you need.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay: 0.1s">
+        <div class="process-number">2</div>
+        <h3>Fixed Quote</h3>
+        <p>You get a clear, fixed-fee quote within 24 hours. No hidden costs, no hourly surprises.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay: 0.2s">
+        <div class="process-number">3</div>
+        <h3>We Get to Work</h3>
+        <p>We connect to your Xero or MYOB, set up your accounts, and start sorting your books.</p>
+      </div>
+      <div class="process-step fade-up" style="transition-delay: 0.3s">
+        <div class="process-number">4</div>
+        <h3>Stay on Track</h3>
+        <p>Monthly check-ins, quarterly reviews, and proactive advice to keep you ahead of the game.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Client Stories</div>
+      <h2>What our clients say</h2>
+      <p>Don't take our word for it &#8212; here's what business owners across Auckland have to say.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-up">
+        <div class="testimonial-quote">&#8220;</div>
+        <p class="testimonial-text">Switched to Clearview after 5 years with a big firm. Night and day difference. They actually explain things in plain English and found $8K in deductions my old accountant missed.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">R</div>
+          <div>
+            <div class="testimonial-name">Rachel Nguyen</div>
+            <div class="testimonial-role">Owner, Bloom Floristry</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="transition-delay: 0.1s">
+        <div class="testimonial-quote">&#8220;</div>
+        <p class="testimonial-text">I used to dread tax season. Now I don't even think about it because Clearview has everything sorted months in advance. Their fixed pricing means no bill shock either.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">D</div>
+          <div>
+            <div class="testimonial-name">Daniel Ropati</div>
+            <div class="testimonial-role">Director, Ropati Construction</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-up" style="transition-delay: 0.2s">
+        <div class="testimonial-quote">&#8220;</div>
+        <p class="testimonial-text">Clearview helped us restructure from a sole trader to an LTC and it's saved us thousands every year. They explained every option and let us make the call. No pressure, just good advice.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">K</div>
+          <div>
+            <div class="testimonial-name">Karen &amp; Tom Ellis</div>
+            <div class="testimonial-role">Owners, North Shore Physio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+
+<section id="pricing">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div class="section-label">Pricing</div>
+      <h2>Simple, fixed monthly pricing</h2>
+      <p>No hourly rates. No bill shock. Pick the plan that fits your business and know exactly what you'll pay.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card fade-up">
+        <h3>Sole Trader</h3>
+        <p class="pricing-desc">For freelancers and sole traders</p>
+        <div class="pricing-price">$150</div>
+        <div class="pricing-period">per month + GST</div>
+        <ul class="pricing-features">
+          <li>Annual tax return</li>
+          <li>GST returns (2 or 6 monthly)</li>
+          <li>Xero or MYOB setup</li>
+          <li>Email &amp; phone support</li>
+          <li>Annual review meeting</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started</a>
+      </div>
+      <div class="pricing-card featured fade-up" style="transition-delay: 0.1s">
+        <div class="pricing-badge">Most Popular</div>
+        <h3>Small Business</h3>
+        <p class="pricing-desc">For companies doing $200K&#8211;$2M</p>
+        <div class="pricing-price">$350</div>
+        <div class="pricing-period">per month + GST</div>
+        <ul class="pricing-features">
+          <li>Everything in Sole Trader</li>
+          <li>Monthly bookkeeping</li>
+          <li>Payroll (up to 5 staff)</li>
+          <li>Quarterly strategy call</li>
+          <li>Company tax return &amp; financials</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-gold">Get Started</a>
+      </div>
+      <div class="pricing-card fade-up" style="transition-delay: 0.2s">
+        <h3>Growth</h3>
+        <p class="pricing-desc">For scaling businesses $2M+</p>
+        <div class="pricing-price">$650</div>
+        <div class="pricing-period">per month + GST</div>
+        <ul class="pricing-features">
+          <li>Everything in Small Business</li>
+          <li>Unlimited payroll</li>
+          <li>Cash flow forecasting</li>
+          <li>Monthly advisory meetings</li>
+          <li>CFO-level strategic support</li>
+        </ul>
+        <a href="#contact" class="pricing-btn pricing-btn-outline">Get Started</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+
+<div class="cta-banner">
+  <h2>Ready to get your numbers sorted?</h2>
+  <p>Book a free 15-minute call. No obligation, no jargon &#8212; just a straight conversation about your business.</p>
+  <a href="#contact" class="btn-white">Book Your Free Call &#8594;</a>
+</div>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-form fade-up">
+        <form onsubmit="event.preventDefault(); alert('Demo form — not connected to a backend.')">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Sarah">
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Johnson">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email</label>
+              <input type="email" placeholder="sarah@mybusiness.co.nz">
+            </div>
+            <div class="form-group">
+              <label>Phone</label>
+              <input type="tel" placeholder="021 123 4567">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Business Type</label>
+            <select>
+              <option>Sole Trader</option>
+              <option>Limited Company (LTC)</option>
+              <option>Partnership</option>
+              <option>Trust</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>How can we help?</label>
+            <textarea placeholder="Tell us about your business and what you're looking for..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Book Free Consultation &#8594;</button>
+        </form>
+      </div>
+      <div class="contact-info fade-up">
+        <h3>Let's talk numbers</h3>
+        <p>Whether you're starting a business, switching accountants, or just want a second opinion on your tax situation &#8212; we're here to help.</p>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">&#9742;</div>
+          <div class="contact-detail-text">
+            <strong>Phone</strong>
+            <span>09 876 5432</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">&#9993;</div>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            <span>hello@clearviewaccounting.co.nz</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon">&#128205;</div>
+          <div class="contact-detail-text">
+            <strong>Office</strong>
+            <span>Level 2, 14 Commerce Street<br>Auckland CBD, 1010</span>
+          </div>
+        </div>
+        <div class="contact-guarantee">
+          <div class="guarantee-icon">&#128170;</div>
+          <div>
+            <h4>Our fixed-fee guarantee</h4>
+            <p>The price we quote is the price you pay. If the scope changes, we'll talk about it first &#8212; never just send a bigger invoice.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <h3>Clearview Accounting</h3>
+      <p>Small business accounting, tax, and advisory for New Zealand businesses. Chartered accountants based in Auckland CBD.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Tax Returns</a>
+      <a href="#services">Bookkeeping</a>
+      <a href="#services">Business Advisory</a>
+      <a href="#services">Payroll</a>
+      <a href="#services">Company Formation</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#about">About Us</a>
+      <a href="#testimonials">Client Stories</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="#">Tax Calendar 2026</a>
+      <a href="#">GST Guide</a>
+      <a href="#">Company Setup Checklist</a>
+      <a href="#">Blog</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Clearview Accounting Ltd. All rights reserved.</span>
+    <span class="footer-credit">Website by <a href="#">Luis Penha</a></span>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navLinks').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('active');
+  }
+
+  function closeMenu() {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('active');
+  }
+
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 20) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -40px 0px'
+  });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
