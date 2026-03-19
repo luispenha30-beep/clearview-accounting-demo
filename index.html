@@ -15,7 +15,7 @@
     --gold-light: #D4B976;
     --gold-muted: rgba(201,169,97,0.12);
     --bg-warm: #F4F2ED;
-    --bg-warm-alt: #ECEAE4;
+    --bg-alt: #ECEAE4;
     --white: #FFFFFF;
     --text-primary: #1C2133;
     --text-secondary: #505868;
@@ -27,7 +27,7 @@
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.04);
     --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
     --shadow-lg: 0 12px 48px rgba(0,0,0,0.08);
-    --transition: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    --ease: 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -43,7 +43,22 @@
     -moz-osx-font-smoothing: grayscale;
   }
 
-  /* ═══════ NAVIGATION ═══════ */
+  .icon {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .icon-lg {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* ═══════ NAV ═══════ */
 
   nav {
     position: fixed;
@@ -57,7 +72,7 @@
     justify-content: space-between;
     padding: 0 56px;
     background: transparent;
-    transition: background var(--transition), box-shadow var(--transition);
+    transition: background var(--ease), box-shadow var(--ease);
   }
 
   nav.scrolled {
@@ -76,7 +91,7 @@
     align-items: center;
     gap: 10px;
     letter-spacing: -0.3px;
-    transition: color var(--transition);
+    transition: color var(--ease);
   }
 
   nav.scrolled .nav-logo { color: var(--navy); }
@@ -106,7 +121,7 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
-    transition: color var(--transition);
+    transition: color var(--ease);
     position: relative;
   }
 
@@ -118,11 +133,10 @@
     width: 0;
     height: 1.5px;
     background: var(--gold);
-    transition: width var(--transition);
+    transition: width var(--ease);
   }
 
   .nav-links a:hover::after { width: 100%; }
-
   nav.scrolled .nav-links a { color: var(--text-secondary); }
   .nav-links a:hover { color: var(--white); }
   nav.scrolled .nav-links a:hover { color: var(--navy); }
@@ -134,26 +148,13 @@
     border-radius: var(--radius) !important;
     font-weight: 600 !important;
     border: 1px solid rgba(255,255,255,0.15) !important;
-    transition: all var(--transition) !important;
+    transition: all var(--ease) !important;
   }
 
   .nav-cta::after { display: none !important; }
-
-  .nav-cta:hover {
-    background: var(--gold) !important;
-    border-color: var(--gold) !important;
-  }
-
-  nav.scrolled .nav-cta {
-    background: var(--navy) !important;
-    color: var(--white) !important;
-    border-color: var(--navy) !important;
-  }
-
-  nav.scrolled .nav-cta:hover {
-    background: var(--navy-light) !important;
-    border-color: var(--navy-light) !important;
-  }
+  .nav-cta:hover { background: var(--gold) !important; border-color: var(--gold) !important; }
+  nav.scrolled .nav-cta { background: var(--navy) !important; color: var(--white) !important; border-color: var(--navy) !important; }
+  nav.scrolled .nav-cta:hover { background: var(--navy-light) !important; border-color: var(--navy-light) !important; }
 
   .hamburger {
     display: none;
@@ -169,11 +170,9 @@
     height: 1.5px;
     background: var(--white);
     transition: all 0.3s ease;
-    display: block;
   }
 
   nav.scrolled .hamburger span { background: var(--navy); }
-
   .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
   .hamburger.active span:nth-child(2) { opacity: 0; }
   .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
@@ -190,23 +189,61 @@
     padding: 0 56px;
   }
 
-  .hero::before {
-    content: '';
+  .hero-bg {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(201,169,97,0.06) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 80% at 20% 80%, rgba(27,42,74,0.8) 0%, transparent 60%);
+    overflow: hidden;
   }
 
-  .hero::after {
-    content: '';
+  .hero-gradient-orb {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201,169,97,0.2), transparent);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.5;
+  }
+
+  .hero-orb-1 {
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(201,169,97,0.15) 0%, transparent 70%);
+    top: -200px;
+    right: -100px;
+  }
+
+  .hero-orb-2 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(27,42,74,0.6) 0%, transparent 70%);
+    bottom: -200px;
+    left: -100px;
+  }
+
+  .hero-orb-3 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201,169,97,0.08) 0%, transparent 70%);
+    top: 40%;
+    left: 30%;
+  }
+
+  .hero-grid-lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: radial-gradient(ellipse 70% 60% at 65% 45%, rgba(0,0,0,0.6) 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 65% 45%, rgba(0,0,0,0.6) 0%, transparent 100%);
+  }
+
+  .hero-line-accent {
+    position: absolute;
+    top: 0;
+    right: 42%;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, transparent, rgba(201,169,97,0.1), transparent);
   }
 
   .hero-grid {
@@ -214,8 +251,8 @@
     margin: 0 auto;
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 96px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 80px;
     align-items: center;
     position: relative;
     z-index: 2;
@@ -226,296 +263,351 @@
   .hero-label {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     color: var(--gold);
     font-size: 12px;
     font-weight: 600;
     letter-spacing: 2.5px;
     text-transform: uppercase;
-    margin-bottom: 32px;
+    margin-bottom: 36px;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.2s forwards;
   }
 
   .hero-label-line {
-    width: 24px;
+    width: 28px;
     height: 1px;
     background: var(--gold);
   }
 
   .hero h1 {
     font-weight: 300;
-    font-size: 64px;
-    line-height: 1.08;
+    font-size: 72px;
+    line-height: 1.04;
     color: var(--white);
-    letter-spacing: -2px;
-    margin-bottom: 28px;
+    letter-spacing: -3px;
+    margin-bottom: 32px;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.35s forwards;
   }
 
-  .hero h1 strong {
-    font-weight: 700;
-  }
+  .hero h1 strong { font-weight: 700; }
+  .hero h1 .gold { color: var(--gold); }
 
   .hero-sub {
     font-size: 17px;
     color: var(--text-on-dark);
-    line-height: 1.75;
-    margin-bottom: 44px;
-    max-width: 440px;
-    font-weight: 400;
+    line-height: 1.8;
+    margin-bottom: 48px;
+    max-width: 460px;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.5s forwards;
   }
 
   .hero-actions {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     align-items: center;
     flex-wrap: wrap;
     opacity: 0;
     animation: fadeUp 0.8s ease 0.65s forwards;
   }
 
+  .hero-trust {
+    margin-top: 64px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .hero-trust-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .hero-trust-logos {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .hero-trust-logo {
+    font-weight: 700;
+    font-size: 13px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.5px;
+  }
+
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
+    from { opacity: 0; transform: translateY(28px); }
     to { opacity: 1; transform: translateY(0); }
   }
 
   .btn-primary {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: var(--gold);
     color: var(--white);
-    padding: 16px 36px;
+    padding: 18px 36px;
     border-radius: var(--radius);
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
-    transition: all var(--transition);
+    transition: all var(--ease);
     border: none;
     cursor: pointer;
-    letter-spacing: 0.2px;
   }
 
   .btn-primary:hover {
     background: var(--gold-light);
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(201,169,97,0.3);
+    box-shadow: 0 12px 32px rgba(201,169,97,0.3);
   }
 
   .btn-ghost {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.5);
     text-decoration: none;
     font-weight: 500;
     font-size: 14px;
-    padding: 16px 8px;
-    transition: color var(--transition);
+    padding: 18px 8px;
+    transition: color var(--ease);
   }
 
   .btn-ghost:hover { color: var(--white); }
 
+  /* Hero visual */
   .hero-visual {
     opacity: 0;
-    animation: fadeUp 1s ease 0.5s forwards;
+    animation: fadeUp 1s ease 0.4s forwards;
+    position: relative;
   }
 
-  .hero-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: var(--radius-lg);
-    padding: 44px;
-    backdrop-filter: blur(8px);
-  }
-
-  .hero-metrics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    margin-bottom: 36px;
-  }
-
-  .hero-metric {
-    padding: 24px;
+  .hero-dashboard {
     background: rgba(255,255,255,0.03);
-    border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    padding: 32px;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
-  .hero-metric-label {
-    font-size: 11px;
+  .dash-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .dash-title {
+    font-size: 13px;
     font-weight: 600;
-    color: rgba(255,255,255,0.35);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 8px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.3px;
   }
 
-  .hero-metric-value {
-    font-size: 32px;
+  .dash-period {
+    font-size: 11px;
+    color: rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.04);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+
+  .dash-kpis {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .dash-kpi {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+
+  .dash-kpi-value {
+    font-size: 28px;
     font-weight: 700;
     color: var(--white);
     letter-spacing: -1px;
     line-height: 1;
+    margin-bottom: 4px;
   }
 
-  .hero-metric-value .accent { color: var(--gold); }
+  .dash-kpi-value .gold { color: var(--gold); }
 
-  .hero-metric-change {
-    font-size: 12px;
-    color: #6BCB77;
+  .dash-kpi-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     font-weight: 600;
-    margin-top: 6px;
   }
 
-  .hero-divider {
-    height: 1px;
-    background: rgba(255,255,255,0.06);
-    margin-bottom: 28px;
-  }
-
-  .hero-bar-chart {
+  .dash-chart {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 12px;
+    padding: 24px;
     margin-bottom: 20px;
   }
 
-  .hero-bar-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: rgba(255,255,255,0.3);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-bottom: 16px;
-  }
-
-  .bar-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-
-  .bar-label {
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    width: 24px;
-    font-weight: 500;
-  }
-
-  .bar-track {
-    flex: 1;
-    height: 6px;
-    background: rgba(255,255,255,0.04);
-    border-radius: 3px;
-    overflow: hidden;
-  }
-
-  .bar-fill {
-    height: 100%;
-    border-radius: 3px;
-    background: var(--gold);
-    opacity: 0.6;
-    transition: width 1.5s cubic-bezier(0.25, 0.1, 0.25, 1);
-  }
-
-  .bar-fill.highlight { opacity: 1; }
-
-  .bar-amount {
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-    font-weight: 600;
-    width: 56px;
-    text-align: right;
-  }
-
-  .hero-card-footer {
+  .dash-chart-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 8px;
+    margin-bottom: 20px;
   }
 
-  .hero-card-tag {
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
-    font-weight: 500;
-    letter-spacing: 0.5px;
+  .dash-chart-title {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 600;
+    letter-spacing: 0.3px;
   }
 
-  .hero-card-total {
-    font-size: 11px;
-    color: rgba(255,255,255,0.3);
-    font-weight: 500;
-  }
-
-  .hero-card-total span {
+  .dash-chart-amount {
+    font-size: 14px;
     color: var(--gold);
     font-weight: 700;
-    font-size: 16px;
-    margin-left: 6px;
   }
 
-  /* ═══════ TRUST BAR ═══════ */
-
-  .trust-bar {
-    background: var(--white);
-    padding: 40px 56px;
-    border-bottom: 1px solid var(--border);
+  .area-chart {
+    height: 100px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .trust-inner {
-    max-width: 1200px;
-    margin: 0 auto;
+  .area-chart svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .chart-line {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2;
+  }
+
+  .chart-area {
+    fill: url(#goldGradient);
+  }
+
+  .chart-dot {
+    fill: var(--gold);
+  }
+
+  .dash-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .dash-row:last-child { border-bottom: none; }
+
+  .dash-row-left {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 56px;
-    flex-wrap: wrap;
+    gap: 10px;
   }
 
-  .trust-label {
-    font-size: 12px;
-    color: var(--text-tertiary);
+  .dash-row-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .dash-row-name {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    white-space: nowrap;
   }
 
-  .trust-divider {
-    width: 1px;
-    height: 20px;
-    background: var(--border);
+  .dash-row-value {
+    font-size: 13px;
+    color: var(--white);
+    font-weight: 600;
   }
 
-  .trust-logos {
-    display: flex;
-    align-items: center;
-    gap: 40px;
+  .dash-row-change {
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
   }
 
-  .trust-logo {
+  .dash-row-change.up { color: #5CB88A; }
+
+  .hero-float-card {
+    position: absolute;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 16px 20px;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-card-1 {
+    top: -16px;
+    right: -20px;
+    animation-delay: 0s;
+  }
+
+  .float-card-2 {
+    bottom: 40px;
+    left: -28px;
+    animation-delay: 3s;
+  }
+
+  .float-value {
+    font-size: 20px;
     font-weight: 700;
-    font-size: 14px;
-    color: var(--text-tertiary);
-    opacity: 0.5;
-    letter-spacing: 0.5px;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .float-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .float-change {
+    font-size: 11px;
+    color: #5CB88A;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
   }
 
   /* ═══════ SECTIONS ═══════ */
 
-  section {
-    padding: 112px 56px;
-  }
+  section { padding: 112px 56px; }
 
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
+  .container { max-width: 1200px; margin: 0 auto; }
 
   .section-header {
     text-align: center;
@@ -555,14 +647,11 @@
     max-width: 520px;
     margin: 0 auto;
     line-height: 1.7;
-    font-weight: 400;
   }
 
   /* ═══════ SERVICES ═══════ */
 
-  #services {
-    background: var(--bg-warm);
-  }
+  #services { background: var(--bg-warm); }
 
   .services-grid {
     display: grid;
@@ -575,8 +664,7 @@
     border-radius: var(--radius-lg);
     padding: 44px 36px;
     border: 1px solid var(--border);
-    transition: all var(--transition);
-    position: relative;
+    transition: all var(--ease);
   }
 
   .service-card:hover {
@@ -585,15 +673,15 @@
     border-color: transparent;
   }
 
-  .service-icon {
-    width: 48px;
-    height: 48px;
+  .service-icon-wrap {
+    width: 52px;
+    height: 52px;
     background: var(--bg-warm);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    color: var(--navy);
     margin-bottom: 24px;
   }
 
@@ -620,16 +708,14 @@
     font-weight: 600;
     color: var(--gold);
     text-decoration: none;
-    transition: gap var(--transition);
+    transition: gap var(--ease);
   }
 
   .service-card:hover .service-link { gap: 10px; }
 
   /* ═══════ ABOUT ═══════ */
 
-  #about {
-    background: var(--white);
-  }
+  #about { background: var(--white); }
 
   .about-grid {
     display: grid;
@@ -681,16 +767,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    color: var(--gold);
     flex-shrink: 0;
     margin-top: 2px;
-    font-weight: 700;
+    color: var(--gold);
   }
 
   .about-visual {
     background: var(--navy-deep);
-    border-radius: var(--radius-lg);
+    border-radius: 20px;
     padding: 56px;
     position: relative;
     overflow: hidden;
@@ -711,14 +795,10 @@
     position: absolute;
     inset: 0;
     background:
-      repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,255,255,0.008) 60px, rgba(255,255,255,0.008) 61px);
+      repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255,255,255,0.006) 60px, rgba(255,255,255,0.006) 61px);
   }
 
-  .about-brand {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-  }
+  .about-brand { position: relative; z-index: 1; text-align: center; }
 
   .about-brand-icon {
     width: 72px;
@@ -783,9 +863,7 @@
 
   /* ═══════ PROCESS ═══════ */
 
-  #process {
-    background: var(--navy-deep);
-  }
+  #process { background: var(--navy-deep); }
 
   #process .section-label { color: var(--gold); }
   #process .section-header h2 { color: var(--white); }
@@ -794,7 +872,7 @@
   .process-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
+    gap: 24px;
   }
 
   .process-step {
@@ -803,7 +881,7 @@
     background: rgba(255,255,255,0.02);
     border: 1px solid rgba(255,255,255,0.04);
     border-radius: var(--radius-lg);
-    transition: all var(--transition);
+    transition: all var(--ease);
   }
 
   .process-step:hover {
@@ -830,7 +908,6 @@
     font-size: 17px;
     color: var(--white);
     margin-bottom: 12px;
-    letter-spacing: -0.2px;
   }
 
   .process-step p {
@@ -841,9 +918,7 @@
 
   /* ═══════ TESTIMONIALS ═══════ */
 
-  #testimonials {
-    background: var(--bg-warm);
-  }
+  #testimonials { background: var(--bg-warm); }
 
   .testimonials-grid {
     display: grid;
@@ -856,7 +931,7 @@
     border-radius: var(--radius-lg);
     padding: 40px 36px;
     border: 1px solid var(--border);
-    transition: transform var(--transition);
+    transition: transform var(--ease);
   }
 
   .testimonial-card:hover { transform: translateY(-3px); }
@@ -900,22 +975,12 @@
   .testimonial-card:nth-child(2) .testimonial-avatar { background: var(--gold); }
   .testimonial-card:nth-child(3) .testimonial-avatar { background: #5A6A7A; }
 
-  .testimonial-name {
-    font-weight: 700;
-    font-size: 14px;
-    color: var(--navy);
-  }
-
-  .testimonial-role {
-    font-size: 13px;
-    color: var(--text-tertiary);
-  }
+  .testimonial-name { font-weight: 700; font-size: 14px; color: var(--navy); }
+  .testimonial-role { font-size: 13px; color: var(--text-tertiary); }
 
   /* ═══════ PRICING ═══════ */
 
-  #pricing {
-    background: var(--white);
-  }
+  #pricing { background: var(--white); }
 
   .pricing-grid {
     display: grid;
@@ -928,15 +993,12 @@
     padding: 48px 36px;
     text-align: center;
     border: 1px solid var(--border);
-    transition: all var(--transition);
+    transition: all var(--ease);
     background: var(--white);
     position: relative;
   }
 
-  .pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-  }
+  .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 
   .pricing-card.featured {
     background: var(--navy-deep);
@@ -959,16 +1021,12 @@
     white-space: nowrap;
   }
 
-  .pricing-card h3 { font-weight: 700; font-size: 20px; margin-bottom: 6px; letter-spacing: -0.3px; }
-  .pricing-desc { font-size: 14px; margin-bottom: 28px; }
-  .pricing-price { font-weight: 800; font-size: 48px; line-height: 1; margin-bottom: 4px; letter-spacing: -2px; }
-  .pricing-period { font-size: 13px; margin-bottom: 32px; }
+  .pricing-card h3 { font-weight: 700; font-size: 20px; margin-bottom: 6px; color: var(--navy); }
+  .pricing-desc { font-size: 14px; margin-bottom: 28px; color: var(--text-tertiary); }
+  .pricing-price { font-weight: 800; font-size: 48px; line-height: 1; margin-bottom: 4px; letter-spacing: -2px; color: var(--navy); }
+  .pricing-period { font-size: 13px; margin-bottom: 32px; color: var(--text-tertiary); }
 
-  .pricing-features {
-    list-style: none;
-    text-align: left;
-    margin-bottom: 32px;
-  }
+  .pricing-features { list-style: none; text-align: left; margin-bottom: 32px; }
 
   .pricing-features li {
     padding: 9px 0;
@@ -977,24 +1035,17 @@
     align-items: center;
     gap: 10px;
     border-bottom: 1px solid var(--border);
+    color: var(--text-secondary);
   }
 
   .pricing-features li:last-child { border-bottom: none; }
-  .pricing-features li::before { content: '\2713'; font-weight: 700; font-size: 13px; flex-shrink: 0; }
-
-  .pricing-card h3 { color: var(--navy); }
-  .pricing-desc { color: var(--text-tertiary); }
-  .pricing-price { color: var(--navy); }
-  .pricing-period { color: var(--text-tertiary); }
-  .pricing-features li { color: var(--text-secondary); }
-  .pricing-features li::before { color: var(--gold); }
+  .pricing-features li::before { content: '\2713'; font-weight: 700; font-size: 13px; color: var(--gold); }
 
   .pricing-card.featured h3 { color: var(--white); }
   .pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.4); }
   .pricing-card.featured .pricing-price { color: var(--gold); }
   .pricing-card.featured .pricing-period { color: rgba(255,255,255,0.35); }
   .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.6); border-color: rgba(255,255,255,0.06); }
-  .pricing-card.featured .pricing-features li::before { color: var(--gold); }
 
   .pricing-btn {
     display: block;
@@ -1005,7 +1056,7 @@
     font-weight: 600;
     font-size: 14px;
     text-align: center;
-    transition: all var(--transition);
+    transition: all var(--ease);
   }
 
   .pricing-btn-outline {
@@ -1014,10 +1065,7 @@
     border: 1.5px solid var(--border);
   }
 
-  .pricing-btn-outline:hover {
-    border-color: var(--navy);
-    background: rgba(27,42,74,0.03);
-  }
+  .pricing-btn-outline:hover { border-color: var(--navy); }
 
   .pricing-btn-gold {
     background: var(--gold);
@@ -1025,11 +1073,7 @@
     border: 1.5px solid var(--gold);
   }
 
-  .pricing-btn-gold:hover {
-    background: var(--gold-light);
-    border-color: var(--gold-light);
-    transform: translateY(-1px);
-  }
+  .pricing-btn-gold:hover { background: var(--gold-light); border-color: var(--gold-light); }
 
   /* ═══════ CTA ═══════ */
 
@@ -1048,26 +1092,13 @@
     background: radial-gradient(ellipse 50% 100% at 50% 100%, rgba(201,169,97,0.06) 0%, transparent 70%);
   }
 
-  .cta-banner h2 {
-    font-weight: 700;
-    font-size: 40px;
-    color: var(--white);
-    margin-bottom: 16px;
-    letter-spacing: -1.5px;
-    position: relative;
-  }
-
-  .cta-banner p {
-    color: var(--text-on-dark);
-    font-size: 17px;
-    margin-bottom: 36px;
-    position: relative;
-  }
+  .cta-banner h2 { font-weight: 700; font-size: 40px; color: var(--white); margin-bottom: 16px; letter-spacing: -1.5px; position: relative; }
+  .cta-banner p { color: var(--text-on-dark); font-size: 17px; margin-bottom: 36px; position: relative; }
 
   .cta-banner .btn-gold {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     background: var(--gold);
     color: var(--white);
     padding: 18px 40px;
@@ -1075,21 +1106,19 @@
     text-decoration: none;
     font-weight: 600;
     font-size: 15px;
-    transition: all var(--transition);
+    transition: all var(--ease);
     position: relative;
   }
 
   .cta-banner .btn-gold:hover {
     background: var(--gold-light);
     transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(201,169,97,0.3);
+    box-shadow: 0 12px 32px rgba(201,169,97,0.3);
   }
 
   /* ═══════ CONTACT ═══════ */
 
-  #contact {
-    background: var(--bg-warm);
-  }
+  #contact { background: var(--bg-warm); }
 
   .contact-grid {
     display: grid;
@@ -1104,12 +1133,7 @@
     border: 1px solid var(--border);
   }
 
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-group { margin-bottom: 20px; }
 
   .form-group label {
@@ -1118,7 +1142,6 @@
     font-size: 13px;
     color: var(--navy);
     margin-bottom: 8px;
-    letter-spacing: 0.2px;
   }
 
   .form-group input,
@@ -1131,7 +1154,7 @@
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: var(--text-primary);
-    transition: border-color var(--transition);
+    transition: border-color var(--ease);
     background: var(--bg-warm);
     outline: none;
   }
@@ -1156,14 +1179,10 @@
     font-weight: 600;
     font-size: 15px;
     cursor: pointer;
-    transition: all var(--transition);
-    letter-spacing: 0.2px;
+    transition: all var(--ease);
   }
 
-  .form-submit:hover {
-    background: var(--navy-light);
-    transform: translateY(-1px);
-  }
+  .form-submit:hover { background: var(--navy-light); transform: translateY(-1px); }
 
   .contact-info { padding-top: 8px; }
 
@@ -1197,8 +1216,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
     flex-shrink: 0;
+    color: var(--gold);
   }
 
   .contact-detail-text strong {
@@ -1225,20 +1244,20 @@
     align-items: flex-start;
   }
 
-  .guarantee-icon { font-size: 24px; flex-shrink: 0; }
-
-  .contact-guarantee h4 {
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--navy);
-    margin-bottom: 4px;
+  .guarantee-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--gold-muted);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
   }
 
-  .contact-guarantee p {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
+  .contact-guarantee h4 { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+  .contact-guarantee p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 
   /* ═══════ FOOTER ═══════ */
 
@@ -1262,7 +1281,6 @@
     font-size: 20px;
     color: var(--white);
     margin-bottom: 14px;
-    letter-spacing: -0.3px;
   }
 
   .footer-brand p {
@@ -1287,7 +1305,7 @@
     text-decoration: none;
     font-size: 14px;
     padding: 5px 0;
-    transition: color var(--transition);
+    transition: color var(--ease);
   }
 
   .footer-col a:hover { color: var(--gold); }
@@ -1298,7 +1316,6 @@
     padding-top: 28px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     font-size: 12px;
     color: rgba(255,255,255,0.2);
   }
@@ -1306,7 +1323,7 @@
   .footer-credit a {
     color: rgba(255,255,255,0.3);
     text-decoration: none;
-    transition: color var(--transition);
+    transition: color var(--ease);
   }
 
   .footer-credit a:hover { color: var(--gold); }
@@ -1319,20 +1336,16 @@
     transition: opacity 0.8s cubic-bezier(0.25, 0.1, 0.25, 1), transform 0.8s cubic-bezier(0.25, 0.1, 0.25, 1);
   }
 
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   /* ═══════ RESPONSIVE ═══════ */
 
   @media (max-width: 1024px) {
-    nav { padding: 0 32px; }
-    .hero { padding: 0 32px; }
+    nav, .hero, .cta-banner { padding-left: 32px; padding-right: 32px; }
     section { padding: 80px 32px; }
+    footer { padding: 56px 32px 32px; }
+    .hero h1 { font-size: 56px; }
     .hero-grid { gap: 48px; }
-    .hero h1 { font-size: 48px; }
-    .about-grid { gap: 56px; }
   }
 
   @media (max-width: 900px) {
@@ -1356,11 +1369,14 @@
     .nav-links a { font-size: 16px; color: var(--text-primary) !important; }
     .nav-cta { background: var(--navy) !important; border-color: var(--navy) !important; color: var(--white) !important; text-align: center; margin-top: 12px; }
 
+    nav, .hero, .cta-banner { padding-left: 24px; padding-right: 24px; }
     section { padding: 72px 24px; }
-    .hero { padding: 0 24px; min-height: auto; padding-top: 120px; padding-bottom: 80px; }
+    footer { padding: 48px 24px 28px; }
+
+    .hero { min-height: auto; padding-top: 120px; padding-bottom: 80px; }
     .hero-grid { grid-template-columns: 1fr; gap: 48px; }
-    .hero h1 { font-size: 40px; letter-spacing: -1.5px; }
-    .hero-sub { font-size: 16px; }
+    .hero h1 { font-size: 42px; letter-spacing: -1.5px; }
+    .hero-float-card { display: none; }
 
     .services-grid { grid-template-columns: 1fr; gap: 12px; }
     .about-grid { grid-template-columns: 1fr; gap: 48px; }
@@ -1372,21 +1388,16 @@
     .section-header h2 { font-size: 32px; }
     .about-content h2 { font-size: 32px; }
 
-    .trust-inner { gap: 24px; }
-    .trust-bar { padding: 32px 24px; }
-    .trust-divider { display: none; }
+    .hero-trust-logos { gap: 20px; flex-wrap: wrap; }
 
     .footer-grid { grid-template-columns: 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
-
-    .cta-banner { padding: 64px 24px; }
-    .cta-banner h2 { font-size: 28px; }
   }
 
   @media (max-width: 480px) {
-    .hero h1 { font-size: 32px; letter-spacing: -1px; }
+    .hero h1 { font-size: 34px; letter-spacing: -1px; }
     .hero-actions { flex-direction: column; align-items: flex-start; }
-    .hero-metrics { grid-template-columns: 1fr; gap: 16px; }
+    .dash-kpis { grid-template-columns: 1fr; }
     .process-grid { grid-template-columns: 1fr; }
     .about-stats { grid-template-columns: 1fr; gap: 16px; }
     .form-row { grid-template-columns: 1fr; }
@@ -1395,7 +1406,16 @@
 </head>
 <body>
 
-<!-- NAVIGATION -->
+<svg style="position:absolute;width:0;height:0">
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(201,169,97,0.3)"/>
+      <stop offset="100%" style="stop-color:rgba(201,169,97,0)"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- NAV -->
 <nav id="navbar">
   <a href="#home" class="nav-logo">
     <div class="logo-mark">C</div>
@@ -1409,87 +1429,127 @@
     <li><a href="#contact" onclick="closeMenu()" class="nav-cta">Free Consultation</a></li>
   </ul>
   <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-    <span></span>
-    <span></span>
-    <span></span>
+    <span></span><span></span><span></span>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="hero-gradient-orb hero-orb-1"></div>
+    <div class="hero-gradient-orb hero-orb-2"></div>
+    <div class="hero-gradient-orb hero-orb-3"></div>
+    <div class="hero-grid-lines"></div>
+    <div class="hero-line-accent"></div>
+  </div>
+
   <div class="hero-grid">
     <div class="hero-content">
       <div class="hero-label">
         <span class="hero-label-line"></span>
         Chartered Accountants
       </div>
-      <h1>Your numbers, <strong>sorted.</strong></h1>
-      <p class="hero-sub">Small business accounting, tax returns, and bookkeeping that actually makes sense. We handle the numbers so you can focus on growing your business.</p>
+      <h1>Your numbers,<br><strong>sorted<span class="gold">.</span></strong></h1>
+      <p class="hero-sub">Small business accounting, tax returns, and advisory that makes sense. We handle the numbers so you can focus on growing your business.</p>
       <div class="hero-actions">
-        <a href="#contact" class="btn-primary">Book a free call &#8594;</a>
-        <a href="#services" class="btn-ghost">View services &#8594;</a>
+        <a href="#contact" class="btn-primary">
+          Book a free call
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#services" class="btn-ghost">
+          View services
+          <svg class="icon" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-label">Trusted partners</div>
+        <div class="hero-trust-logos">
+          <span class="hero-trust-logo">XERO</span>
+          <span class="hero-trust-logo">MYOB</span>
+          <span class="hero-trust-logo">CA ANZ</span>
+          <span class="hero-trust-logo">IRD</span>
+        </div>
       </div>
     </div>
+
     <div class="hero-visual">
-      <div class="hero-card">
-        <div class="hero-metrics">
-          <div class="hero-metric">
-            <div class="hero-metric-label">Tax saved (FY26)</div>
-            <div class="hero-metric-value">$<span class="accent">47</span>K</div>
-            <div class="hero-metric-change">&#9650; 12% vs last year</div>
+      <div class="hero-float-card float-card-1">
+        <div class="float-value">$47K</div>
+        <div class="float-label">Tax Saved</div>
+        <div class="float-change">+12% YoY</div>
+      </div>
+      <div class="hero-float-card float-card-2">
+        <div class="float-value">99.8%</div>
+        <div class="float-label">Accuracy</div>
+      </div>
+      <div class="hero-dashboard">
+        <div class="dash-header">
+          <span class="dash-title">Financial Overview</span>
+          <span class="dash-period">FY 2026</span>
+        </div>
+        <div class="dash-kpis">
+          <div class="dash-kpi">
+            <div class="dash-kpi-value">$<span class="gold">842</span>K</div>
+            <div class="dash-kpi-label">Revenue</div>
           </div>
-          <div class="hero-metric">
-            <div class="hero-metric-label">Filing accuracy</div>
-            <div class="hero-metric-value">99.8<span class="accent">%</span></div>
-            <div class="hero-metric-change">&#9650; Zero IRD penalties</div>
+          <div class="dash-kpi">
+            <div class="dash-kpi-value"><span class="gold">24</span>%</div>
+            <div class="dash-kpi-label">Net Margin</div>
+          </div>
+          <div class="dash-kpi">
+            <div class="dash-kpi-value"><span class="gold">48</span>hr</div>
+            <div class="dash-kpi-label">Turnaround</div>
           </div>
         </div>
-        <div class="hero-divider"></div>
-        <div class="hero-bar-chart">
-          <div class="hero-bar-label">Monthly revenue</div>
-          <div class="bar-row">
-            <span class="bar-label">Q1</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 45%"></div></div>
-            <span class="bar-amount">$68,200</span>
+        <div class="dash-chart">
+          <div class="dash-chart-header">
+            <span class="dash-chart-title">Quarterly Revenue</span>
+            <span class="dash-chart-amount">+18.4%</span>
           </div>
-          <div class="bar-row">
-            <span class="bar-label">Q2</span>
-            <div class="bar-track"><div class="bar-fill" style="width: 62%"></div></div>
-            <span class="bar-amount">$94,100</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Q3</span>
-            <div class="bar-track"><div class="bar-fill highlight" style="width: 78%"></div></div>
-            <span class="bar-amount">$118,400</span>
-          </div>
-          <div class="bar-row">
-            <span class="bar-label">Q4</span>
-            <div class="bar-track"><div class="bar-fill highlight" style="width: 92%"></div></div>
-            <span class="bar-amount">$139,800</span>
+          <div class="area-chart">
+            <svg viewBox="0 0 400 100" preserveAspectRatio="none">
+              <path class="chart-area" d="M0,80 C30,70 60,65 100,55 C140,45 170,50 200,40 C230,30 260,35 300,20 C340,10 370,12 400,5 L400,100 L0,100 Z"/>
+              <path class="chart-line" d="M0,80 C30,70 60,65 100,55 C140,45 170,50 200,40 C230,30 260,35 300,20 C340,10 370,12 400,5"/>
+              <circle class="chart-dot" cx="100" cy="55" r="3"/>
+              <circle class="chart-dot" cx="200" cy="40" r="3"/>
+              <circle class="chart-dot" cx="300" cy="20" r="3"/>
+              <circle class="chart-dot" cx="400" cy="5" r="3.5"/>
+            </svg>
           </div>
         </div>
-        <div class="hero-card-footer">
-          <span class="hero-card-tag">FY2026 Overview</span>
-          <span class="hero-card-total">Total <span>$420,500</span></span>
+        <div class="dash-row">
+          <div class="dash-row-left">
+            <div class="dash-row-dot" style="background: var(--gold)"></div>
+            <span class="dash-row-name">Tax Savings</span>
+          </div>
+          <div>
+            <span class="dash-row-value">$47,200</span>
+            <span class="dash-row-change up">+12%</span>
+          </div>
+        </div>
+        <div class="dash-row">
+          <div class="dash-row-left">
+            <div class="dash-row-dot" style="background: #5CB88A"></div>
+            <span class="dash-row-name">GST Returns</span>
+          </div>
+          <div>
+            <span class="dash-row-value">On time</span>
+            <span class="dash-row-change up">100%</span>
+          </div>
+        </div>
+        <div class="dash-row">
+          <div class="dash-row-left">
+            <div class="dash-row-dot" style="background: #6B8AFE"></div>
+            <span class="dash-row-name">Compliance</span>
+          </div>
+          <div>
+            <span class="dash-row-value">Zero penalties</span>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<!-- TRUST BAR -->
-<div class="trust-bar reveal">
-  <div class="trust-inner">
-    <span class="trust-label">Trusted by 300+ NZ businesses</span>
-    <div class="trust-divider"></div>
-    <div class="trust-logos">
-      <span class="trust-logo">XERO</span>
-      <span class="trust-logo">MYOB</span>
-      <span class="trust-logo">IRD APPROVED</span>
-      <span class="trust-logo">CA ANZ</span>
-    </div>
-  </div>
-</div>
 
 <!-- SERVICES -->
 <section id="services">
@@ -1501,40 +1561,52 @@
     </div>
     <div class="services-grid">
       <div class="service-card reveal">
-        <div class="service-icon">&#128200;</div>
+        <div class="service-icon-wrap">
+          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M18.7 8l-5.1 5.2-2.8-2.7L7 14.3"/></svg>
+        </div>
         <h3>Tax Returns</h3>
         <p>Individual, company, and trust returns filed on time, every time. We find every deduction you're entitled to.</p>
-        <a href="#contact" class="service-link">Learn more &#8594;</a>
+        <a href="#contact" class="service-link">Learn more <svg class="icon" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="service-card reveal">
-        <div class="service-icon">&#128218;</div>
+        <div class="service-icon-wrap">
+          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
         <h3>Bookkeeping</h3>
-        <p>Weekly or monthly bookkeeping to keep your accounts clean and your GST returns accurate. Xero, MYOB, or QuickBooks.</p>
-        <a href="#contact" class="service-link">Learn more &#8594;</a>
+        <p>Weekly or monthly bookkeeping to keep your accounts clean and GST returns accurate. Xero, MYOB, or QuickBooks.</p>
+        <a href="#contact" class="service-link">Learn more <svg class="icon" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="service-card reveal">
-        <div class="service-icon">&#127919;</div>
+        <div class="service-icon-wrap">
+          <svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
         <h3>Business Advisory</h3>
         <p>Growth strategy, cash flow forecasting, and business structure advice. We help you plan for what's next.</p>
-        <a href="#contact" class="service-link">Learn more &#8594;</a>
+        <a href="#contact" class="service-link">Learn more <svg class="icon" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="service-card reveal">
-        <div class="service-icon">&#128176;</div>
+        <div class="service-icon-wrap">
+          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
         <h3>Payroll</h3>
         <p>PAYE, KiwiSaver, and employee leave handled. Payslips go out on time, IRD filings sorted, every fortnight.</p>
-        <a href="#contact" class="service-link">Learn more &#8594;</a>
+        <a href="#contact" class="service-link">Learn more <svg class="icon" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="service-card reveal">
-        <div class="service-icon">&#127970;</div>
+        <div class="service-icon-wrap">
+          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
         <h3>Company Formation</h3>
         <p>LTC, LAQC, or standard company setup. Companies Office registration, IRD numbers, GST, shareholder agreements.</p>
-        <a href="#contact" class="service-link">Learn more &#8594;</a>
+        <a href="#contact" class="service-link">Learn more <svg class="icon" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="service-card reveal">
-        <div class="service-icon">&#128270;</div>
+        <div class="service-icon-wrap">
+          <svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
         <h3>IRD Audit Support</h3>
         <p>Full representation, document preparation, and negotiation to resolve issues quickly and fairly.</p>
-        <a href="#contact" class="service-link">Learn more &#8594;</a>
+        <a href="#contact" class="service-link">Learn more <svg class="icon" style="width:16px;height:16px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
   </div>
@@ -1550,10 +1622,10 @@
         <p>We started Clearview because we were tired of seeing small business owners overpay on tax, stress about compliance deadlines, and get vague advice from accountants who didn't understand their business.</p>
         <p>Our team speaks plain English, responds within 24 hours, and genuinely cares about your bottom line.</p>
         <ul class="about-checklist">
-          <li><span class="check-icon">&#10003;</span> Fixed fees &#8212; no surprise invoices, ever</li>
-          <li><span class="check-icon">&#10003;</span> Cloud-based &#8212; access your accounts anywhere</li>
-          <li><span class="check-icon">&#10003;</span> Proactive advice &#8212; we flag opportunities, not just problems</li>
-          <li><span class="check-icon">&#10003;</span> All responses within 24 hours, guaranteed</li>
+          <li><span class="check-icon"><svg class="icon" style="width:12px;height:12px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Fixed fees — no surprise invoices, ever</li>
+          <li><span class="check-icon"><svg class="icon" style="width:12px;height:12px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Cloud-based — access your accounts anywhere</li>
+          <li><span class="check-icon"><svg class="icon" style="width:12px;height:12px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> Proactive advice — we flag opportunities, not just problems</li>
+          <li><span class="check-icon"><svg class="icon" style="width:12px;height:12px" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span> All responses within 24 hours, guaranteed</li>
         </ul>
       </div>
       <div class="about-visual reveal">
@@ -1587,28 +1659,28 @@
     <div class="section-header reveal">
       <div class="section-label"><span class="label-line"></span> How It Works <span class="label-line"></span></div>
       <h2>Getting started takes<br>15 minutes</h2>
-      <p>No long onboarding process. No paperwork headaches. Here's how we get you sorted.</p>
+      <p>No long onboarding. No paperwork headaches. Here's how we get you sorted.</p>
     </div>
     <div class="process-grid">
       <div class="process-step reveal">
         <div class="process-number">1</div>
         <h3>Free Chat</h3>
-        <p>15-minute call to understand your business, your pain points, and what you need.</p>
+        <p>15-minute call to understand your business and what you need.</p>
       </div>
       <div class="process-step reveal">
         <div class="process-number">2</div>
         <h3>Fixed Quote</h3>
-        <p>Clear, fixed-fee quote within 24 hours. No hidden costs, no hourly surprises.</p>
+        <p>Clear, fixed-fee quote within 24 hours. No hidden costs.</p>
       </div>
       <div class="process-step reveal">
         <div class="process-number">3</div>
         <h3>We Get to Work</h3>
-        <p>We connect to your Xero or MYOB, set up your accounts, and start sorting your books.</p>
+        <p>Connect to your Xero or MYOB and start sorting your books.</p>
       </div>
       <div class="process-step reveal">
         <div class="process-number">4</div>
         <h3>Stay on Track</h3>
-        <p>Monthly check-ins, quarterly reviews, and proactive advice to keep you ahead.</p>
+        <p>Monthly check-ins, quarterly reviews, proactive advice.</p>
       </div>
     </div>
   </div>
@@ -1620,7 +1692,7 @@
     <div class="section-header reveal">
       <div class="section-label"><span class="label-line"></span> Client Stories <span class="label-line"></span></div>
       <h2>What our clients say</h2>
-      <p>Don't take our word for it &#8212; here's what business owners across Auckland have to say.</p>
+      <p>Here's what business owners across Auckland have to say.</p>
     </div>
     <div class="testimonials-grid">
       <div class="testimonial-card reveal">
@@ -1647,7 +1719,7 @@
       </div>
       <div class="testimonial-card reveal">
         <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-        <p class="testimonial-text">Clearview helped us restructure from a sole trader to an LTC and it's saved us thousands every year. They explained every option and let us make the call. No pressure, just good advice.</p>
+        <p class="testimonial-text">Clearview helped us restructure from a sole trader to an LTC and it's saved us thousands every year. No pressure, just good advice.</p>
         <div class="testimonial-author">
           <div class="testimonial-avatar">K</div>
           <div>
@@ -1719,8 +1791,8 @@
 <!-- CTA -->
 <div class="cta-banner">
   <h2>Ready to get your numbers sorted?</h2>
-  <p>Book a free 15-minute call. No obligation, no jargon &#8212; just a straight conversation about your business.</p>
-  <a href="#contact" class="btn-gold">Book your free call &#8594;</a>
+  <p>Book a free 15-minute call. No obligation, no jargon — just a straight conversation.</p>
+  <a href="#contact" class="btn-gold">Book your free call <svg class="icon" style="width:18px;height:18px" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
 </div>
 
 <!-- CONTACT -->
@@ -1761,40 +1833,48 @@
           </div>
           <div class="form-group">
             <label>How can we help?</label>
-            <textarea placeholder="Tell us about your business and what you're looking for..."></textarea>
+            <textarea placeholder="Tell us about your business and what you need..."></textarea>
           </div>
-          <button type="submit" class="form-submit">Book Free Consultation &#8594;</button>
+          <button type="submit" class="form-submit">Book Free Consultation</button>
         </form>
       </div>
       <div class="contact-info reveal">
         <h3>Let's talk numbers</h3>
-        <p>Whether you're starting a business, switching accountants, or just want a second opinion &#8212; we're here to help.</p>
+        <p>Whether you're starting a business, switching accountants, or want a second opinion — we're here to help.</p>
         <div class="contact-detail">
-          <div class="contact-detail-icon">&#9742;</div>
+          <div class="contact-detail-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
           <div class="contact-detail-text">
             <strong>Phone</strong>
             <span>09 876 5432</span>
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">&#9993;</div>
+          <div class="contact-detail-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
           <div class="contact-detail-text">
             <strong>Email</strong>
             <span>hello@clearviewaccounting.co.nz</span>
           </div>
         </div>
         <div class="contact-detail">
-          <div class="contact-detail-icon">&#128205;</div>
+          <div class="contact-detail-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
           <div class="contact-detail-text">
             <strong>Office</strong>
             <span>Level 2, 14 Commerce Street<br>Auckland CBD, 1010</span>
           </div>
         </div>
         <div class="contact-guarantee">
-          <div class="guarantee-icon">&#9899;</div>
+          <div class="guarantee-icon">
+            <svg class="icon" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
           <div>
             <h4>Our fixed-fee guarantee</h4>
-            <p>The price we quote is the price you pay. If the scope changes, we talk about it first &#8212; never just send a bigger invoice.</p>
+            <p>The price we quote is the price you pay. If the scope changes, we talk about it first — never just send a bigger invoice.</p>
           </div>
         </div>
       </div>
@@ -1807,7 +1887,7 @@
   <div class="footer-grid">
     <div class="footer-brand">
       <h3>Clearview Accounting</h3>
-      <p>Small business accounting, tax, and advisory for New Zealand businesses. Chartered accountants based in Auckland CBD.</p>
+      <p>Small business accounting, tax, and advisory for New Zealand businesses. Chartered accountants, Auckland CBD.</p>
     </div>
     <div class="footer-col">
       <h4>Services</h4>
@@ -1838,38 +1918,21 @@
   </div>
 </footer>
 
-<!-- SCRIPTS -->
 <script>
   function toggleMenu() {
     document.getElementById('navLinks').classList.toggle('open');
     document.getElementById('hamburger').classList.toggle('active');
   }
-
   function closeMenu() {
     document.getElementById('navLinks').classList.remove('open');
     document.getElementById('hamburger').classList.remove('active');
   }
-
   window.addEventListener('scroll', () => {
-    const nav = document.getElementById('navbar');
-    if (window.scrollY > 40) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
   });
-
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -60px 0px'
-  });
-
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 
